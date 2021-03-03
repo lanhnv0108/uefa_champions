@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">UEFA Score</string>
+    <string name="fixtures">Fixtures</string>
+    <string name="standing">Standing</string>
+    <string name="top_scorers">Top Scorers</string>
+    <string name="favorites">Favorites</string>
+    <string name="tittle_main">UEFA Champions league</string>
+    <string name="search_team">Search team</string>
+    <string name="shots_on_goal">Shots on Goal</string>
+    <string name="yellow_card">Yellow Cards</string>
+    <string name="red_cards">Red Cards</string>
+    <string name="ball_possession">Ball Possession</string>
+    <string name="corner_kicks">Corner Kicks</string>
+    <string name="passes">Passes</string>
+    <string name="live_matches">Live Matches</string>
+    <string name="view_all">View all</string>
+    <string name="live">LIVE</string>
+    <string name="history_matches">History Matches</string>
+</resources>
