@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp_10"
+    android:foreground="?attr/selectableItemBackground">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewRank"
+        style="@style/TextViewStandingStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.085" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageViewLogo"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_20"
+        android:layout_weight="0.056" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewNameTeam"
+        style="@style/TextViewStandingStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.330"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewPlayed"
+        style="@style/TextViewStandingStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.085" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewWin"
+        style="@style/TextViewStandingStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.085" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewDraw"
+        style="@style/TextViewStandingStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.085" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewLose"
+        style="@style/TextViewStandingStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.085" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewGoals"
+        style="@style/TextViewStandingStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.116" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewPoints"
+        style="@style/TextViewStandingStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.094" />
+</LinearLayout>
