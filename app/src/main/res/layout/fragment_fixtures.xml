@@ -1,4 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    android:layout_height="match_parent"
+    android:background="@null"
+    tools:context=".screen.main.MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.072992700729927" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageViewLogo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/dp_28"
+            android:background="@drawable/logo_champion"
+            android:scaleType="centerCrop"
+            app:layout_constraintDimensionRatio="54:52"
+            app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.13" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewFixture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:fontFamily="@font/sf_compact_bold"
+            android:text="@string/fixtures"
+            android:textColor="@color/color_orange_white"
+            android:textSize="@dimen/sp_24"
+            app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+            app:layout_constraintTop_toBottomOf="@id/imageViewLogo" />
+
+        <SearchView
+            android:id="@+id/searchViewTeam"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/dp_28"
+            android:background="@drawable/background_search"
+            android:closeIcon="@android:color/transparent"
+            android:iconifiedByDefault="false"
+            android:queryBackground="@android:color/transparent"
+            android:queryHint="@string/search_team"
+            android:searchIcon="@drawable/ic_search"
+            android:theme="@style/ThemeOverlay.search"
+            app:layout_constraintDimensionRatio="351:49"
+            app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/textViewFixture"
+            app:layout_constraintWidth_percent="0.854014598540146" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewLiveMatches"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_28"
+            android:fontFamily="@font/sf_compact_bold"
+            android:text="@string/live_matches"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/sp_24"
+            app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+            app:layout_constraintTop_toBottomOf="@id/searchViewTeam" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewDayOfMatches"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_35"
+            android:textColor="@color/color_orange_white"
+            app:layout_constraintEnd_toStartOf="@id/imageViewCalendar"
+            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintStart_toEndOf="@id/textViewLiveMatches"
+            app:layout_constraintTop_toBottomOf="@id/searchViewTeam" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageViewCalendar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/dp_31"
+            android:layout_marginEnd="@dimen/dp_30"
+            android:background="@drawable/ic_calendar"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/searchViewTeam"
+            app:layout_constraintWidth_percent="0.0583941605839416" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewFixtureOfDay"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/dp_23"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintDimensionRatio="411:133"
+            app:layout_constraintTop_toBottomOf="@id/textViewLiveMatches"
+            tools:listitem="@layout/item_fixture_of_day" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
