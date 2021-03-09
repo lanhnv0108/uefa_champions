@@ -1,6 +1,7 @@
 package com.sun.uefascore.data.source.remote.fetchjson
 
 import com.sun.uefascore.BuildConfig
+import com.sun.uefascore.data.model.FixtureEntry
 import com.sun.uefascore.utils.TypeModel
 import org.json.JSONArray
 import org.json.JSONObject
@@ -8,10 +9,8 @@ import java.io.BufferedInputStream
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
-import java.lang.StringBuilder
 import java.net.HttpURLConnection
 import java.net.URL
-import kotlin.jvm.Throws
 
 class ParseDataWithJson {
 
@@ -41,19 +40,28 @@ class ParseDataWithJson {
     }
 
     fun parseJson(jsonString: String, typeModel: TypeModel): Any? =
-            try {
-                when (typeModel) {
-                    else -> null
+        try {
+            when (typeModel) {
+                TypeModel.FIXTURE -> {
+                    parseJsonToList(
+                        JSONObject(jsonString).getJSONArray(FixtureEntry.RESPONSE),
+                        typeModel
+                    )
                 }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                null
+                else -> null
             }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
 
     @Throws(Exception::class)
     private fun parseJsonToObject(jsonObject: JSONObject?, typeModel: TypeModel): Any? {
         val parseJsonToModel = ParseJsonToModel()
         return when (typeModel) {
+            TypeModel.FIXTURE -> {
+                parseJsonToModel.parseJsonToFixture(jsonObject)
+            }
             else -> null
         }
     }
