@@ -9,4 +9,5 @@ object Constant {
     const val BASE_LEAGUE = "&league=2"
     const val BASE_SEASON = "&season="
     const val DAY_FORMAT = "yyyy-MM-dd"
+    const val RESPONSE = "response"
 }

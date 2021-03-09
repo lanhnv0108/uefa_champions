@@ -11,6 +11,9 @@ import java.io.InputStream
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
+import com.sun.uefascore.data.model.StandingGroupEntry
+import com.sun.uefascore.data.model.StandingLeagueEntry
+import com.sun.uefascore.utils.Constant
 
 class ParseDataWithJson {
 
@@ -48,6 +51,26 @@ class ParseDataWithJson {
                         typeModel
                     )
                 }
+                TypeModel.STANDING_LEAGUE -> {
+                    parseJsonToObject(
+                        JSONObject(jsonString).getJSONArray(
+                            Constant.RESPONSE
+                        ).getJSONObject(0).getJSONObject(StandingLeagueEntry.LEAGUE),
+                        typeModel
+                    )
+                }
+                TypeModel.STANDING_GROUP -> {
+                    parseJsonToListJson(
+                        JSONObject(jsonString).getJSONArray(StandingGroupEntry.STANDING_GROUP),
+                        typeModel
+                    )
+                }
+                TypeModel.STANDING -> {
+                    parseJsonToList(
+                        JSONArray(jsonString),
+                        typeModel
+                    )
+                }
                 else -> null
             }
         } catch (e: Exception) {
@@ -56,11 +79,23 @@ class ParseDataWithJson {
         }
 
     @Throws(Exception::class)
-    private fun parseJsonToObject(jsonObject: JSONObject?, typeModel: TypeModel): Any? {
+    private fun parseJsonToObject(json: Any?, typeModel: TypeModel): Any? {
         val parseJsonToModel = ParseJsonToModel()
         return when (typeModel) {
             TypeModel.FIXTURE -> {
-                parseJsonToModel.parseJsonToFixture(jsonObject)
+                parseJsonToModel.parseJsonToFixture(json as JSONObject?)
+            }
+            TypeModel.FIXTURE -> {
+                parseJsonToModel.parseJsonToFixture(json as JSONObject?)
+            }
+            TypeModel.STANDING_LEAGUE -> {
+                parseJsonToModel.parseJsonToStandingLeague(json as JSONObject?)
+            }
+            TypeModel.STANDING_GROUP -> {
+                parseJsonToModel.parseJsonToStandingGroup(json as JSONArray?)
+            }
+            TypeModel.STANDING -> {
+                parseJsonToModel.parseJsonToStanding(json as JSONObject?)
             }
             else -> null
         }
@@ -71,6 +106,16 @@ class ParseDataWithJson {
         val data = mutableListOf<Any?>()
         for (i in 0 until (jsonArray?.length() ?: 0)) {
             val jsonObject = jsonArray?.getJSONObject(i)
+            data.add(parseJsonToObject(jsonObject, typeModel))
+        }
+        return data.filterNotNull()
+    }
+
+    @Throws(Exception::class)
+    private fun parseJsonToListJson(jsonArray: JSONArray?, typeModel: TypeModel): Any {
+        val data = mutableListOf<Any?>()
+        for (i in 0 until (jsonArray?.length() ?: 0)) {
+            val jsonObject = jsonArray?.getJSONArray(i)
             data.add(parseJsonToObject(jsonObject, typeModel))
         }
         return data.filterNotNull()
