@@ -16,4 +16,12 @@
     <string name="view_all">View all</string>
     <string name="live">LIVE</string>
     <string name="history_matches">History Matches</string>
+    <string name="title_rank">#</string>
+    <string name="title_team">Team</string>
+    <string name="title_played">P</string>
+    <string name="title_win">W</string>
+    <string name="title_draw">D</string>
+    <string name="title_lose">L</string>
+    <string name="title_goals">Goals</string>
+    <string name="title_points">PTS</string>
 </resources>
