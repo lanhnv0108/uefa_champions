@@ -30,8 +30,8 @@ class ParseJsonToModel {
     private fun parseJsonToGoal(jsonObject: JSONObject?): Goals? =
         jsonObject?.run {
             Goals(
-                getInt(GoalsEntry.HOME),
-                getInt(GoalsEntry.AWAY)
+                getString(GoalsEntry.HOME),
+                getString(GoalsEntry.AWAY)
             )
         }
 

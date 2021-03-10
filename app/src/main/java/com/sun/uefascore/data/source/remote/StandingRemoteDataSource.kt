@@ -12,7 +12,10 @@ class StandingRemoteDataSource private constructor() : StandingDataSource.Remote
     }
 
     override fun <T> getDataStandingLeague(listener: OnFetchDataJsonListener<T>) {
-        val stringUrl = Constant.BASE_URL + STANDINGS + Constant.BASE_SEASON + Constant.BASE_LEAGUE
+        val stringUrl = Constant.BASE_URL +
+                STANDINGS +
+                Constant.BASE_SEASON +
+                Constant.BASE_LEAGUE
         GetJsonFromUrl(listener, TypeModel.STANDING_LEAGUE).execute(stringUrl)
     }
 
