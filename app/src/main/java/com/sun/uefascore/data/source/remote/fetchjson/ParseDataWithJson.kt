@@ -73,6 +73,12 @@ class ParseDataWithJson {
                         typeModel
                     )
                 }
+                TypeModel.TOP_SCORER -> {
+                    parseJsonToList(
+                        JSONObject(jsonString).getJSONArray(Constant.RESPONSE),
+                        typeModel
+                    )
+                }
                 else -> null
             }
         } catch (e: Exception) {
@@ -95,6 +101,9 @@ class ParseDataWithJson {
             }
             TypeModel.STANDING -> {
                 parseJsonToModel.parseJsonToStanding(json as JSONObject?)
+            }
+            TypeModel.TOP_SCORER -> {
+                parseJsonToModel.parseJsonToTopScorer(json as JSONObject?)
             }
             else -> null
         }

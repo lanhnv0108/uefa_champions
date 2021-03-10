@@ -94,4 +94,36 @@ class ParseJsonToModel {
                 lose = getInt(AllEntry.LOSE)
             )
         }
+
+    @Throws(Exception::class)
+    fun parseJsonToTopScorer(jsonObject: JSONObject?): TopScorer? =
+        jsonObject?.run {
+            TopScorer(
+                player = parseJsonToPlayer(getJSONObject(TopScorerEntry.PLAYER)),
+                statistic = parseJsonToStatistic(getJSONArray(TopScorerEntry.STATISTIC).getJSONObject(0))
+            )
+        }
+
+    @Throws(Exception::class)
+    fun parseJsonToPlayer(jsonObject: JSONObject?): Player? =
+        jsonObject?.run {
+            Player(
+                id = getInt(PLayerEntry.ID),
+                name = getString(PLayerEntry.NAME),
+                age = getInt(PLayerEntry.AGE),
+                nationality = getString(PLayerEntry.NATIONALITY),
+                height = getString(PLayerEntry.HEIGHT),
+                weight = getString(PLayerEntry.WEIGHT),
+                photo = getString(PLayerEntry.PHOTO)
+            )
+        }
+
+    @Throws(Exception::class)
+    private fun parseJsonToStatistic(jsonObject: JSONObject?): Statistic? =
+        jsonObject?.run {
+            Statistic(
+                team = parseJsonToTeam(getJSONObject(StatisticEntry.TEAM)),
+                goals = getJSONObject(StatisticEntry.GOALS).getInt(StatisticEntry.TOTAL)
+            )
+        }
 }
