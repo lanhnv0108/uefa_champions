@@ -13,4 +13,11 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="ThemeOverlay.search" parent="AppTheme">
+        <!-- Text color -->
+        <item name="android:editTextColor">@color/color_orange_white</item>
+        <!-- Hint text color -->
+        <item name="android:textColorHint">@color/color_gray_light</item>
+    </style>
 </resources>

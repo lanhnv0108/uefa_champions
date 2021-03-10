@@ -10,4 +10,6 @@ object Constant {
     const val BASE_SEASON = "&season="
     const val DAY_FORMAT = "yyyy-MM-dd"
     const val RESPONSE = "response"
+    const val TYPE_HEADER = 1
+    const val TYPE_ITEM = 2
 }
