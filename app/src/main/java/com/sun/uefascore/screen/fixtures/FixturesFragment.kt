@@ -50,6 +50,7 @@ class FixturesFragment : Fragment(), ContractFixture.View {
         fixturePresenter.apply {
             setView(this@FixturesFragment)
             getFixture(dayDevice, season[0])
+            getAllFixture(season[0])
         }
     }
 
@@ -88,6 +89,8 @@ class FixturesFragment : Fragment(), ContractFixture.View {
     override fun onGetFixtureSuccess(fixtures: MutableList<Fixture>) {
         fixtureAdapter.updateData(fixtures)
     }
+
+    override fun onGetAllFixtureSuccess(fixtures: MutableList<Fixture>) {}
 
     override fun onError(exception: Exception?) {
         Toast.makeText(context, exception?.message, Toast.LENGTH_SHORT).show()

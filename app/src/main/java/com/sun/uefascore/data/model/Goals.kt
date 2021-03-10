@@ -1,8 +1,8 @@
 package com.sun.uefascore.data.model
 
 data class Goals(
-    val home: Int?,
-    val away: Int?
+    val home: String?,
+    val away: String?
 )
 
 object GoalsEntry {

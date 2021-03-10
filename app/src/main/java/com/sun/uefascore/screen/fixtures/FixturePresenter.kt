@@ -24,6 +24,21 @@ class FixturePresenter internal constructor(private val repository: FixtureRepos
             })
     }
 
+    override fun getAllFixture(season: String) {
+        repository?.getAllFixture(
+            season,
+            object : OnFetchDataJsonListener<MutableList<Fixture>> {
+                override fun onSuccess(data: MutableList<Fixture>) {
+                    view?.onGetAllFixtureSuccess(data)
+                }
+
+                override fun onError(exception: Exception?) {
+                    view?.onError(exception)
+                }
+            }
+        )
+    }
+
     override fun onStart() {
     }
 

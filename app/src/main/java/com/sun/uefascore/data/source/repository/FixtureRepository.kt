@@ -17,6 +17,13 @@ class FixtureRepository private constructor(
         remote.getFixture(date, season, listener)
     }
 
+    fun getAllFixture(
+        season: String,
+        listener: OnFetchDataJsonListener<MutableList<Fixture>>
+    ) {
+        remote.getAllFixture(season, listener)
+    }
+
     private object Holder {
         val INSTANCE = FixtureRepository(
             remote = FixtureRemoteDataSource.instance
