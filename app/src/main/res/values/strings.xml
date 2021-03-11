@@ -24,4 +24,5 @@
     <string name="title_lose">L</string>
     <string name="title_goals">Goals</string>
     <string name="title_points">PTS</string>
+    <string name="title_player">Player</string>
 </resources>
