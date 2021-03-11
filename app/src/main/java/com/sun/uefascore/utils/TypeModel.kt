@@ -4,5 +4,8 @@ enum class TypeModel {
     FIXTURE,
     STANDING_LEAGUE,
     STANDING_GROUP,
-    STANDING
+    STANDING,
+    TOP_SCORER,
+    PLAYER,
+    STATISTIC
 }
