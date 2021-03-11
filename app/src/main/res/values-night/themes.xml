@@ -35,4 +35,15 @@
         <item name="android:layout_gravity">center</item>
         <item name="android:gravity">center</item>
     </style>
+
+    <style name="TextViewTitleStyle">
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="fontFamily">@font/sf_compact_bold</item>
+    </style>
+
+    <!-- Customize ImageView -->
+    <style name="CircleImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

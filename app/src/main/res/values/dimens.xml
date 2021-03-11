@@ -19,4 +19,6 @@
     <dimen name="dp_36">36dp</dimen>
     <dimen name="dp_100">100dp</dimen>
     <dimen name="dp_167">167dp</dimen>
+     <dimen name="dp_350">350dp</dimen>
+    <dimen name="dp_410">410dp</dimen>
 </resources>
