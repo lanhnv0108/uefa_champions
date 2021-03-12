@@ -13,4 +13,6 @@ object Constant {
     const val RESPONSE = "response"
     const val TYPE_HEADER = 1
     const val TYPE_ITEM = 2
+    const val BASE_ID = "id="
+    const val BASE_TEAM = "team="
 }

@@ -4,6 +4,7 @@ import com.sun.uefascore.BuildConfig
 import com.sun.uefascore.data.model.FixtureEntry
 import com.sun.uefascore.data.model.StandingGroupEntry
 import com.sun.uefascore.data.model.StandingLeagueEntry
+import com.sun.uefascore.data.model.TeamDetailEntry
 import com.sun.uefascore.utils.Constant
 import com.sun.uefascore.utils.TypeModel
 import org.json.JSONArray
@@ -79,6 +80,20 @@ class ParseDataWithJson {
                         typeModel
                     )
                 }
+                TypeModel.TEAM_DETAIL -> {
+                    parseJsonToObject(
+                        JSONObject(jsonString).getJSONArray(
+                            Constant.RESPONSE
+                        ).getJSONObject(0).getJSONObject(TeamDetailEntry.TEAM),
+                        TypeModel.TEAM_DETAIL
+                    )
+                }
+                TypeModel.PLAYER_DETAIL -> {
+                    parseJsonToList(
+                        JSONObject(jsonString).getJSONArray(Constant.RESPONSE),
+                        TypeModel.PLAYER_DETAIL
+                    )
+                }
                 else -> null
             }
         } catch (e: Exception) {
@@ -104,6 +119,12 @@ class ParseDataWithJson {
             }
             TypeModel.TOP_SCORER -> {
                 parseJsonToModel.parseJsonToTopScorer(json as JSONObject?)
+            }
+            TypeModel.PLAYER_DETAIL -> {
+                parseJsonToModel.parseJsonToPLayerDetail(json as JSONObject?)
+            }
+            TypeModel.TEAM_DETAIL -> {
+                parseJsonToModel.parseJsonToTeamDetail(json as JSONObject?)
             }
             else -> null
         }
