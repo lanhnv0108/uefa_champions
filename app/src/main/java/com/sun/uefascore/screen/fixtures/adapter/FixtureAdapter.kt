@@ -1,4 +1,4 @@
-package com.sun.uefascore.screen.adapter
+package com.sun.uefascore.screen.fixtures.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,8 +12,7 @@ class FixtureAdapter() :
 
     private var onItemClickedHome: ((Fixture) -> Unit)? = null
     private var onItemClickedAway: ((Fixture) -> Unit)? = null
-    private val fixtures = mutableListOf<Fixture>()
-
+    private val fixtures = mutableListOf<Fixture>() 
 
     fun updateData(fixture: MutableList<Fixture>?) {
         fixture?.let {

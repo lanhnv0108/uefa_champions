@@ -8,5 +8,6 @@ enum class TypeModel {
     TOP_SCORER,
     PLAYER_DETAIL,
     STATISTIC,
-    TEAM_DETAIL
+    TEAM_DETAIL,
+    SEASON
 }
