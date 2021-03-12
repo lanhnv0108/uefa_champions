@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.sun.uefascore.R
 import com.sun.uefascore.data.model.TopScorer
 import com.sun.uefascore.data.source.repository.TopScorerRepository
+import com.sun.uefascore.screen.playerdetail.PlayerDetailFragment
 import com.sun.uefascore.screen.topscorers.adapter.TopScorersAdapter
 import com.sun.uefascore.utils.OnItemRecyclerViewClickListener
 import kotlinx.android.synthetic.main.fragment_top_scorers.*
@@ -48,6 +49,10 @@ class TopScorersFragment : Fragment(), TopScorersContract.View,
     }
 
     override fun onItemClickListener(item: TopScorer?) {
+        item?.player?.let {
+            PlayerDetailFragment.newInstance(it)
+                .show(this@TopScorersFragment.childFragmentManager, null)
+        }
     }
 
     private fun initView() {

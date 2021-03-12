@@ -1,5 +1,9 @@
 package com.sun.uefascore.data.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Player(
     val id: Int?,
     val name: String?,
@@ -8,7 +12,7 @@ data class Player(
     val height: String?,
     val weight: String?,
     val photo: String?
-)
+) : Parcelable
 
 object PLayerEntry {
     const val ID = "id"
