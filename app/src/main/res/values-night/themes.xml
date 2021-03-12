@@ -46,4 +46,14 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
+
+    <style name="TextViewTitleStyle.White.Right" parent="TextViewTitleStyle">
+        <item name="android:gravity">right</item>
+        <item name="android:textColor">@color/color_white</item>
+    </style>
+
+    <style name="TextViewTitleStyle.White.Left" parent="TextViewTitleStyle">
+        <item name="android:gravity">left</item>
+        <item name="android:textColor">@color/color_white</item>
+    </style>
 </resources>

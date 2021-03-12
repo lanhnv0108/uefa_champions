@@ -29,4 +29,7 @@
     <string name="title_nationality">Nationality</string>
     <string name="title_height">Height</string>
     <string name="title_weight">Weight</string>
+    <string name="title_city">City</string>
+    <string name="title_country">Country</string>
+    <string name="title_founded">Founded</string>
 </resources>
