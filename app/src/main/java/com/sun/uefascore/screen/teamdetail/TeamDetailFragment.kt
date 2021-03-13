@@ -10,6 +10,8 @@ import androidx.core.os.bundleOf
 import com.sun.uefascore.R
 import com.sun.uefascore.data.model.PlayerDetail
 import com.sun.uefascore.data.model.TeamDetail
+import com.sun.uefascore.data.source.local.TeamLocalDataSource
+import com.sun.uefascore.data.source.repository.FavoriteRepository
 import com.sun.uefascore.data.source.repository.TeamRepository
 import com.sun.uefascore.screen.playerdetail.PlayerDetailFragment
 import com.sun.uefascore.screen.teamdetail.adapter.PlayerAdapter
@@ -22,13 +24,21 @@ class TeamDetailFragment : Fragment(), TeamDetailContract.View,
     OnItemRecyclerViewClickListener<PlayerDetail> {
 
     private val presenter by lazy {
-        TeamDetailPresenter(TeamRepository.instance)
+        TeamDetailPresenter(
+            TeamRepository.instance,
+            FavoriteRepository.getInstance(
+                TeamLocalDataSource.getInstance(requireContext())
+            )
+        )
     }
     private val adapter: PlayerAdapter by lazy {
         PlayerAdapter()
     }
     private var season: String? = null
     private var idTeam: String? = null
+    private var isCheck = false
+    private var teamDetail: TeamDetail? = null
+    private var playerDetails = mutableListOf<PlayerDetail>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,20 +55,45 @@ class TeamDetailFragment : Fragment(), TeamDetailContract.View,
     }
 
     override fun onGetTeamByIdSuccess(teamDetail: TeamDetail) {
-        textViewCountry.text = teamDetail.country
-        textViewFounded.text = teamDetail.founded.toString()
-        textViewNameTeam.text = teamDetail.name
+        textViewCountry?.text = teamDetail.country
+        textViewFounded?.text = teamDetail.founded.toString()
+        textViewNameTeam?.text = teamDetail.name
         LoadImageUrl {
             imageViewLogo?.setImageBitmap(it)
         }.execute(teamDetail.logo)
+        this.teamDetail = teamDetail
     }
 
     override fun onGetPlayersByIdSuccess(playerDetails: MutableList<PlayerDetail>) {
         adapter.updateData(playerDetails)
+        this.playerDetails = playerDetails
     }
 
     override fun onError(exception: Exception) {
         Toast.makeText(context, exception.message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onGetTeamLocalSuccess(teamDetail: TeamDetail) {
+        checkFavorite(true)
+    }
+
+    override fun onGetPlayersLocalSuccess(playerDetails: MutableList<PlayerDetail>) = Unit
+
+    override fun onSaveTeamLocalSuccess() {
+        checkFavorite(true)
+    }
+
+    override fun onSavePlayersLocalSuccess() = Unit
+
+    override fun onDeleteTeamLocalSuccess() {
+        checkFavorite(false)
+    }
+
+    override fun onDeletePlayersLocalSuccess() = Unit
+
+    override fun onFailed(idMessage: Int) {
+        Toast.makeText(context, resources.getString(id), Toast.LENGTH_SHORT).show()
+        checkFavorite(false)
     }
 
     override fun onItemClickListener(item: PlayerDetail?) {
@@ -81,6 +116,7 @@ class TeamDetailFragment : Fragment(), TeamDetailContract.View,
                     onGetTeamById(season, idTeam)
                     onGetPlayersById(season, idTeam)
                     setView(this@TeamDetailFragment)
+                    onGetTeamLocal(idTeam)
                 }
             }
         }
@@ -100,6 +136,35 @@ class TeamDetailFragment : Fragment(), TeamDetailContract.View,
     private fun handleEvents() {
         imageViewBack.setOnClickListener {
             fragmentManager?.popBackStack()
+        }
+        imageViewFavorite.setOnClickListener {
+            if (isCheck) {
+                idTeam?.let { id ->
+                    presenter.onDeleteTeamLocal(id)
+                    presenter.onDeletePlayersLocal(id)
+                }
+            } else {
+                teamDetail?.let { teamDetail ->
+                    presenter.onSaveTeamLocal(teamDetail)
+                }
+                playerDetails?.let { playerDetails ->
+                    presenter.onSavePlayersLocal(playerDetails)
+                }
+            }
+        }
+    }
+
+    private fun checkFavorite(isFavorite: Boolean) {
+        if (isFavorite) {
+            isCheck = isFavorite
+            imageViewFavorite.setImageDrawable(
+                resources.getDrawable(R.drawable.ic_favorite_checked)
+            )
+        } else {
+            isCheck = isFavorite
+            imageViewFavorite.setImageDrawable(
+                resources.getDrawable(R.drawable.ic_favorite_check)
+            )
         }
     }
 
