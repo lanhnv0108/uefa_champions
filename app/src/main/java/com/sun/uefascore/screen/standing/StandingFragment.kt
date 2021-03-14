@@ -11,7 +11,9 @@ import com.sun.uefascore.data.model.StandingLeague
 import com.sun.uefascore.data.model.Team
 import com.sun.uefascore.data.source.repository.StandingRepository
 import com.sun.uefascore.screen.standing.adapter.StandingGroupAdapter
+import com.sun.uefascore.screen.teamdetail.TeamDetailFragment
 import com.sun.uefascore.utils.OnItemRecyclerViewClickListener
+import com.sun.uefascore.utils.addFragment
 import kotlinx.android.synthetic.main.fragment_standing.*
 import kotlin.Exception
 
@@ -50,6 +52,13 @@ class StandingFragment : Fragment(),
     }
 
     override fun onItemClickListener(item: Team?) {
+        addFragment(
+            TeamDetailFragment.newInstance(
+                season,
+                item?.id.toString()
+            ),
+            R.id.containerLayout
+        )
     }
 
     private fun initView() {
