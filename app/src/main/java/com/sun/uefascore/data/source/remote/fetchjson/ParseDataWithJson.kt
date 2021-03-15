@@ -98,6 +98,12 @@ class ParseDataWithJson {
                         TypeModel.SEASON
                     )
                 }
+                TypeModel.TEAM_SEARCH -> {
+                    parseJsonToList(
+                        JSONObject(jsonString).getJSONArray(FixtureEntry.RESPONSE),
+                        typeModel
+                    )
+                }
                 else -> null
             }
         } catch (e: Exception) {
@@ -129,6 +135,9 @@ class ParseDataWithJson {
             }
             TypeModel.TEAM_DETAIL -> {
                 parseJsonToModel.parseJsonToTeamDetail(json as JSONObject?)
+            }
+            TypeModel.TEAM_SEARCH -> {
+                parseJsonToModel.parseJsonToTeamSearch(json as JSONObject)
             }
             else -> null
         }

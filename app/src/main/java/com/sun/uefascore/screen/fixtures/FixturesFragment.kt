@@ -15,7 +15,9 @@ import com.sun.uefascore.data.model.Fixture
 import com.sun.uefascore.data.source.repository.FixtureRepository
 import com.sun.uefascore.screen.fixtures.adapter.FixtureAdapter
 import com.sun.uefascore.screen.fixtures.adapter.FixtureAllAdapter
+import com.sun.uefascore.screen.searchteam.SearchFragment
 import com.sun.uefascore.utils.Constant
+import com.sun.uefascore.utils.addFragment
 import kotlinx.android.synthetic.main.fragment_fixtures.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -80,7 +82,8 @@ class FixturesFragment : Fragment(), ContractFixture.View, AdapterView.OnItemSel
 
     private fun searchTeam() {
         searchViewTeam.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(p0: String?): Boolean {
+            override fun onQueryTextSubmit(name: String?): Boolean {
+                addFragment(SearchFragment.newInstance(name?.trim()), R.id.containerLayout)
                 return true
             }
 

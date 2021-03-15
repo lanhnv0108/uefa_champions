@@ -16,4 +16,5 @@ object Constant {
     const val TYPE_ITEM = 2
     const val BASE_ID = "id="
     const val BASE_TEAM = "team="
+    const val SEARCH = "search="
 }
