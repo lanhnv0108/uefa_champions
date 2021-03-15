@@ -5,8 +5,8 @@ import com.sun.uefascore.data.source.remote.OnFetchDataJsonListener
 import com.sun.uefascore.utils.TypeModel
 
 class GetJsonFromUrl<T> constructor(
-        private val listener: OnFetchDataJsonListener<T>,
-        private val typeMode: TypeModel
+    private val listener: OnFetchDataJsonListener<T>,
+    private val typeMode: TypeModel
 ) : AsyncTask<String?, Unit?, String>() {
 
     private var exception: Exception? = null
@@ -23,7 +23,7 @@ class GetJsonFromUrl<T> constructor(
 
     override fun onPostExecute(result: String) {
         super.onPostExecute(result)
-        if (result != null && result.isNotBlank()) {
+        if (result.isNotBlank()) {
             val data = ParseDataWithJson().parseJson(result, typeMode)
             data?.let {
                 @Suppress("UNCHECKED_CAST")

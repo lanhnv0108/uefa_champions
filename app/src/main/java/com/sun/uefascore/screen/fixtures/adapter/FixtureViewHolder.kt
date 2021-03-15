@@ -1,12 +1,13 @@
-package com.sun.uefascore.screen.adapter
+package com.sun.uefascore.screen.fixtures.adapter
 
 import android.annotation.SuppressLint
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.sun.uefascore.data.model.Fixture
+import com.sun.uefascore.utils.loadImageUrl
 import kotlinx.android.synthetic.main.item_fixture_of_day.view.*
 
+@Suppress("NAME_SHADOWING")
 class FixtureViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     private var onItemClickedHome: ((Fixture) -> Unit)? = null
@@ -19,12 +20,8 @@ class FixtureViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             textViewNameAway.text = fixture.away?.name
             textViewGoals.text =
                 fixture.goals?.home.toString() + " - " + fixture.goals?.away.toString()
-            Glide.with(context)
-                .load(fixture.home?.logo)
-                .into(imageViewTeamHome)
-            Glide.with(context)
-                .load(fixture.away?.logo)
-                .into(imageViewTeamWay)
+            fixture.home?.logo?.let { imageViewTeamHome?.loadImageUrl(it) }
+            fixture.away?.logo?.let { imageViewTeamWay?.loadImageUrl(it) }
             imageViewTeamHome.setOnClickListener {
                 onItemClickedHome?.let { it -> it(fixture) }
             }
