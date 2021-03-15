@@ -9,5 +9,6 @@ enum class TypeModel {
     PLAYER_DETAIL,
     STATISTIC,
     TEAM_DETAIL,
-    SEASON
+    SEASON,
+    TEAM_SEARCH
 }

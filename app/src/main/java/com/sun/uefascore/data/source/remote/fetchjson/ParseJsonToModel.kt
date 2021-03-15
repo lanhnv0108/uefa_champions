@@ -154,4 +154,15 @@ class ParseJsonToModel {
                 )
             )
         }
+
+    fun parseJsonToTeamSearch(jsonObject: JSONObject?): TeamDetail? =
+        jsonObject?.run {
+            TeamDetail(
+                id = getJSONObject(TeamDetailEntry.TEAM).getInt(TeamDetailEntry.ID),
+                name = getJSONObject(TeamDetailEntry.TEAM).getString(TeamDetailEntry.NAME),
+                country = getJSONObject(TeamDetailEntry.TEAM).getString(TeamDetailEntry.COUNTRY),
+                founded = null,
+                logo = getJSONObject(TeamDetailEntry.TEAM).getString(TeamDetailEntry.LOGO)
+            )
+        }
 }
