@@ -141,8 +141,8 @@ class FixturesFragment : Fragment(), ContractFixture.View, AdapterView.OnItemSel
                 seasons
             )
         }
-        spinnerSeason.adapter = stateAdapter
-        spinnerSeason.onItemSelectedListener = this
+        spinnerSeason?.adapter = stateAdapter
+        spinnerSeason?.onItemSelectedListener = this
 
     }
 

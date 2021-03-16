@@ -54,8 +54,8 @@ class StandingFragment : Fragment(),
     override fun onItemClickListener(item: Team?) {
         addFragment(
             TeamDetailFragment.newInstance(
-                season,
-                item?.id.toString()
+                item?.id.toString(),
+                season
             ),
             R.id.containerLayout
         )

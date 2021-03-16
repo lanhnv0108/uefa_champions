@@ -8,8 +8,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.sun.uefascore.R
 import com.sun.uefascore.data.model.TeamDetail
+import com.sun.uefascore.data.source.local.TeamLocalDataSource
+import com.sun.uefascore.data.source.repository.FavoriteRepository
 import com.sun.uefascore.screen.favorite.adapter.FavoriteAdapter
 import com.sun.uefascore.screen.favorite.adapter.OnFavoriteRecyclerViewClickListener
+import com.sun.uefascore.screen.teamdetail.TeamDetailFragment
+import com.sun.uefascore.utils.addFragment
 import kotlinx.android.synthetic.main.fragment_favorite.*
 
 class FavoriteFragment : Fragment(), FavoriteContract.View,
@@ -19,8 +23,13 @@ class FavoriteFragment : Fragment(), FavoriteContract.View,
         FavoriteAdapter()
     }
     private val presenter by lazy {
-        FavoritePresenter()
+        FavoritePresenter(
+            FavoriteRepository.getInstance(
+                TeamLocalDataSource.getInstance(requireContext())
+            )
+        )
     }
+    private var season = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,13 +45,26 @@ class FavoriteFragment : Fragment(), FavoriteContract.View,
         initData()
     }
 
+    override fun onDeleteTeamLocalSuccess() {
+
+    }
+
+    override fun onDeletePlayersLocalSuccess() = Unit
+
+    override fun onGetFavoritesSuccess(teamDetails: MutableList<TeamDetail>) {
+        adapter.updateData(teamDetails)
+    }
+
     private fun initView() {
         recyclerViewFavorite.adapter = adapter
         adapter.registerRecyclerViewClickListener(this)
     }
 
     private fun initData() {
-        presenter.setView(this)
+        presenter.apply {
+            setView(this@FavoriteFragment)
+            onGetFavorites()
+        }
     }
 
     override fun onFailed(idMessage: Int) {
@@ -50,9 +72,18 @@ class FavoriteFragment : Fragment(), FavoriteContract.View,
     }
 
     override fun onClickItemListener(item: TeamDetail) {
+        addFragment(
+            TeamDetailFragment.newInstance(item.id.toString(), season),
+            R.id.containerLayout
+        )
     }
 
     override fun onClickFavoriteListener(item: TeamDetail) {
+        presenter.apply {
+            onDeletePlayersLocal(item.id.toString())
+            onDeleteTeamLocal(item.id.toString())
+            onGetFavorites()
+        }
     }
 
     companion object {

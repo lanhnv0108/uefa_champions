@@ -51,6 +51,12 @@ class FavoriteRepository private constructor(
         local.deleteDataPlayerDetailsByIdTeam(idTeam, listener)
     }
 
+    fun getAllTeamDetail(
+        listener: OnFetchDataLocalListener<MutableList<TeamDetail>>
+    ) {
+        local.getAllDataTeamDetail(listener)
+    }
+
     companion object {
 
         @Volatile

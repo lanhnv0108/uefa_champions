@@ -57,6 +57,12 @@ class TeamLocalDataSource private constructor(
         playerDetailDao.deleteByIdTeam(idTeam, listener)
     }
 
+    override fun getAllDataTeamDetail(
+        listener: OnFetchDataLocalListener<MutableList<TeamDetail>>
+    ) {
+        teamDetailDao.getAll(listener)
+    }
+
     companion object {
 
         @Volatile

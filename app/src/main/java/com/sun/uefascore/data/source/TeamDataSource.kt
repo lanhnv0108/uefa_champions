@@ -40,6 +40,10 @@ interface TeamDataSource {
             idTeam: String,
             listener: OnFetchDataLocalListener<Int>
         )
+
+        fun getAllDataTeamDetail(
+            listener: OnFetchDataLocalListener<MutableList<TeamDetail>>
+        )
     }
 
     /**
