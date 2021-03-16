@@ -2,7 +2,6 @@ package com.sun.uefascore.screen.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -12,12 +11,19 @@ import com.sun.uefascore.screen.favorite.FavoriteFragment
 import com.sun.uefascore.screen.fixtures.FixturesFragment
 import com.sun.uefascore.screen.standing.StandingFragment
 import com.sun.uefascore.screen.topscorers.TopScorersFragment
+import com.sun.uefascore.utils.Constant
 import com.sun.uefascore.utils.MenuItem
+import com.sun.uefascore.utils.OnFavoriteListener
+import com.sun.uefascore.utils.OnGetSeasonListener
 import kotlinx.android.synthetic.main.fragment_home_page.*
 
-class HomePageFragment : Fragment() {
+class HomePageFragment : Fragment(), OnGetSeasonListener, OnFavoriteListener {
 
     private val fragments = mutableListOf<Fragment>()
+    private val fixturesFragment = FixturesFragment.newInstance()
+    private val standingFragment = StandingFragment.newInstance()
+    private val topScorersFragment = TopScorersFragment.newInstance()
+    private val favoriteFragment = FavoriteFragment.newInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,21 +32,37 @@ class HomePageFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home_page, container, false)
     }
 
+    override fun onClickFavoriteListener() {
+        favoriteFragment.onClickFavoriteListener()
+    }
+
+    override fun getSeason(season: String) {
+        standingFragment.updateSeason(season)
+        topScorersFragment.updateSeason(season)
+        favoriteFragment.updateSeason(season)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        fixturesFragment.apply {
+            registerGetSeasonListener(this@HomePageFragment)
+            registerFavoriteListener(this@HomePageFragment)
+        }
+        standingFragment.registerFavoriteListener(this)
         initFragment()
         fragmentManager?.let {
             viewPagerContainer.adapter = ViewPagerContainerAdapter(it, fragments)
+            viewPagerContainer.offscreenPageLimit = Constant.LIMIT_OFFSET
             initBottomItem()
         }
     }
 
     private fun initFragment() {
         fragments.apply {
-            add(MenuItem.FIXTURES.ordinal, FixturesFragment.newInstance())
-            add(MenuItem.STANDING.ordinal, StandingFragment.newInstance())
-            add(MenuItem.SCORERS.ordinal, TopScorersFragment.newInstance())
-            add(MenuItem.FAVORITE.ordinal, FavoriteFragment.newInstance())
+            add(MenuItem.FIXTURES.ordinal, fixturesFragment)
+            add(MenuItem.STANDING.ordinal, standingFragment)
+            add(MenuItem.SCORERS.ordinal, topScorersFragment)
+            add(MenuItem.FAVORITE.ordinal, favoriteFragment)
         }
     }
 

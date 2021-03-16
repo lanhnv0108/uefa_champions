@@ -29,7 +29,16 @@ class FavoriteFragment : Fragment(), FavoriteContract.View,
             )
         )
     }
-    private var season = ""
+    private var season: String? = null
+
+    fun onClickFavoriteListener() {
+        initData()
+    }
+
+    fun updateSeason(season: String) {
+        this.season = season
+        initData()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,9 +54,7 @@ class FavoriteFragment : Fragment(), FavoriteContract.View,
         initData()
     }
 
-    override fun onDeleteTeamLocalSuccess() {
-
-    }
+    override fun onDeleteTeamLocalSuccess() {}
 
     override fun onDeletePlayersLocalSuccess() = Unit
 

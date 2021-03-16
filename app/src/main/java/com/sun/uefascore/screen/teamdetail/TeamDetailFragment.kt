@@ -1,12 +1,12 @@
 package com.sun.uefascore.screen.teamdetail
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import com.sun.uefascore.R
 import com.sun.uefascore.data.model.PlayerDetail
 import com.sun.uefascore.data.model.TeamDetail
@@ -16,13 +16,14 @@ import com.sun.uefascore.data.source.repository.TeamRepository
 import com.sun.uefascore.screen.playerdetail.PlayerDetailFragment
 import com.sun.uefascore.screen.teamdetail.adapter.PlayerAdapter
 import com.sun.uefascore.utils.LoadImageUrl
+import com.sun.uefascore.utils.OnFavoriteListener
 import com.sun.uefascore.utils.OnItemRecyclerViewClickListener
 import kotlinx.android.synthetic.main.fragment_team_detail.*
-import java.lang.Exception
 
 class TeamDetailFragment : Fragment(), TeamDetailContract.View,
     OnItemRecyclerViewClickListener<PlayerDetail> {
 
+    private var onFavoriteListener: OnFavoriteListener? = null
     private val presenter by lazy {
         TeamDetailPresenter(
             TeamRepository.instance,
@@ -103,6 +104,10 @@ class TeamDetailFragment : Fragment(), TeamDetailContract.View,
         }
     }
 
+    fun registerFavoriteListener(onFavoriteListener: OnFavoriteListener) {
+        this.onFavoriteListener = onFavoriteListener
+    }
+
     private fun initView() {
         recyclerViewPlayers.adapter = adapter
         adapter.registerItemRecyclerViewClickListener(this)
@@ -143,6 +148,7 @@ class TeamDetailFragment : Fragment(), TeamDetailContract.View,
                     presenter.onDeleteTeamLocal(id)
                     presenter.onDeletePlayersLocal(id)
                 }
+                onFavoriteListener?.onClickFavoriteListener()
             } else {
                 teamDetail?.let { teamDetail ->
                     presenter.onSaveTeamLocal(teamDetail)
@@ -150,6 +156,7 @@ class TeamDetailFragment : Fragment(), TeamDetailContract.View,
                 playerDetails?.let { playerDetails ->
                     presenter.onSavePlayersLocal(playerDetails)
                 }
+                onFavoriteListener?.onClickFavoriteListener()
             }
         }
     }
@@ -173,7 +180,7 @@ class TeamDetailFragment : Fragment(), TeamDetailContract.View,
         private const val BUNDLE_ID_TEAM = "BUNDLE_ID_TEAM"
         private const val BUNDLE_SEASON = "BUNDLE_SEASON"
 
-        fun newInstance(idTeam: String, season: String) =
+        fun newInstance(idTeam: String, season: String?) =
             TeamDetailFragment().apply {
                 arguments = bundleOf(
                     BUNDLE_ID_TEAM to idTeam,

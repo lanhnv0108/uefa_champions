@@ -12,14 +12,16 @@ import com.sun.uefascore.data.model.Team
 import com.sun.uefascore.data.source.repository.StandingRepository
 import com.sun.uefascore.screen.standing.adapter.StandingGroupAdapter
 import com.sun.uefascore.screen.teamdetail.TeamDetailFragment
+import com.sun.uefascore.utils.OnFavoriteListener
 import com.sun.uefascore.utils.OnItemRecyclerViewClickListener
 import com.sun.uefascore.utils.addFragment
 import kotlinx.android.synthetic.main.fragment_standing.*
 import kotlin.Exception
 
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class StandingFragment : Fragment(),
     StandingContract.View,
-    OnItemRecyclerViewClickListener<Team> {
+    OnItemRecyclerViewClickListener<Team>, OnFavoriteListener {
 
     private var season = ""
     private val presenter by lazy {
@@ -28,6 +30,7 @@ class StandingFragment : Fragment(),
     private val adapter: StandingGroupAdapter by lazy {
         StandingGroupAdapter()
     }
+    private var onFavoriteListener: OnFavoriteListener? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,7 +43,6 @@ class StandingFragment : Fragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
-        initData()
     }
 
     override fun onGetStandingLeagueSuccess(standingLeague: StandingLeague) {
@@ -56,14 +58,29 @@ class StandingFragment : Fragment(),
             TeamDetailFragment.newInstance(
                 item?.id.toString(),
                 season
-            ),
+            ).apply {
+                registerFavoriteListener(this@StandingFragment)
+            },
             R.id.containerLayout
         )
+    }
+
+    override fun onClickFavoriteListener() {
+        onFavoriteListener?.onClickFavoriteListener()
+    }
+
+    fun registerFavoriteListener(onFavoriteListener: OnFavoriteListener) {
+        this.onFavoriteListener = onFavoriteListener
     }
 
     private fun initView() {
         recyclerViewStandingGroup.adapter = adapter
         adapter.registerItemRecyclerViewClickListener(this)
+    }
+
+    fun updateSeason(season: String) {
+        this.season = season
+        initData()
     }
 
     private fun initData() {

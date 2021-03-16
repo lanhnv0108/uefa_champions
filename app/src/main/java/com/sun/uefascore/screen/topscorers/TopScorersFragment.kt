@@ -1,5 +1,9 @@
 package com.sun.uefascore.screen.topscorers
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +15,7 @@ import com.sun.uefascore.data.model.TopScorer
 import com.sun.uefascore.data.source.repository.TopScorerRepository
 import com.sun.uefascore.screen.playerdetail.PlayerDetailFragment
 import com.sun.uefascore.screen.topscorers.adapter.TopScorersAdapter
+import com.sun.uefascore.utils.Constant
 import com.sun.uefascore.utils.OnItemRecyclerViewClickListener
 import kotlinx.android.synthetic.main.fragment_top_scorers.*
 import java.lang.Exception
@@ -26,6 +31,11 @@ class TopScorersFragment : Fragment(), TopScorersContract.View,
     }
     private var season: String? = null
 
+    fun updateSeason(season: String) {
+        this.season = season
+        initData()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,7 +47,6 @@ class TopScorersFragment : Fragment(), TopScorersContract.View,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
-        initData()
     }
 
     override fun onGetTopScorerSuccess(topScorers: MutableList<TopScorer>) {

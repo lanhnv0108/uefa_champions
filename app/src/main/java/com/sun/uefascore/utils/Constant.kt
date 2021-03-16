@@ -17,4 +17,5 @@ object Constant {
     const val BASE_ID = "id="
     const val BASE_TEAM = "team="
     const val SEARCH = "search="
+    const val LIMIT_OFFSET = 4
 }
