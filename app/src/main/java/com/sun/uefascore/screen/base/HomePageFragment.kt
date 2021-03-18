@@ -34,7 +34,7 @@ class HomePageFragment : Fragment(), OnGetSeasonListener, OnFavoriteListener {
     }
 
     override fun onClickFavoriteListener() {
-        favoriteFragment.onClickFavoriteListener()
+        favoriteFragment.onUpdateFavorite()
     }
 
     override fun getSeason(season: String) {
@@ -50,6 +50,7 @@ class HomePageFragment : Fragment(), OnGetSeasonListener, OnFavoriteListener {
             registerFavoriteListener(this@HomePageFragment)
         }
         standingFragment.registerFavoriteListener(this)
+        favoriteFragment.registerFavoriteListener(this)
         initFragment()
         fragmentManager?.let {
             viewPagerContainer.adapter = ViewPagerContainerAdapter(it, fragments)
