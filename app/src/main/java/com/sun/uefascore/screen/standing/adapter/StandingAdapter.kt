@@ -34,7 +34,7 @@ class StandingAdapter : RecyclerView.Adapter<StandingAdapter.ViewHolder?>() {
     override fun getItemCount() = standings.size
 
     fun updateData(standings: MutableList<Standing>) {
-        standings?.let {
+        standings.let {
             this.standings.clear()
             this.standings.addAll(it)
             notifyDataSetChanged()

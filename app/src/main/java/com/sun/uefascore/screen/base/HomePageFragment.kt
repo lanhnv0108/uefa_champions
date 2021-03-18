@@ -15,6 +15,7 @@ import com.sun.uefascore.utils.Constant
 import com.sun.uefascore.utils.MenuItem
 import com.sun.uefascore.utils.OnFavoriteListener
 import com.sun.uefascore.utils.OnGetSeasonListener
+import com.sun.uefascore.utils.*
 import kotlinx.android.synthetic.main.fragment_home_page.*
 
 class HomePageFragment : Fragment(), OnGetSeasonListener, OnFavoriteListener {
@@ -97,6 +98,7 @@ class HomePageFragment : Fragment(), OnGetSeasonListener, OnFavoriteListener {
             }
 
             override fun onPageSelected(position: Int) {
+                hideKeyboard()
                 bottomNavigation.menu.getItem(position).isChecked = true
             }
 

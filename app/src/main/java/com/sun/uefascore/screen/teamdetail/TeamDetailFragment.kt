@@ -1,5 +1,6 @@
 package com.sun.uefascore.screen.teamdetail
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +21,7 @@ import com.sun.uefascore.utils.OnFavoriteListener
 import com.sun.uefascore.utils.OnItemRecyclerViewClickListener
 import kotlinx.android.synthetic.main.fragment_team_detail.*
 
+@Suppress("DEPRECATION")
 class TeamDetailFragment : Fragment(), TeamDetailContract.View,
     OnItemRecyclerViewClickListener<PlayerDetail> {
 
@@ -153,7 +155,7 @@ class TeamDetailFragment : Fragment(), TeamDetailContract.View,
                 teamDetail?.let { teamDetail ->
                     presenter.onSaveTeamLocal(teamDetail)
                 }
-                playerDetails?.let { playerDetails ->
+                playerDetails.let { playerDetails ->
                     presenter.onSavePlayersLocal(playerDetails)
                 }
                 onFavoriteListener?.onClickFavoriteListener()
@@ -161,6 +163,7 @@ class TeamDetailFragment : Fragment(), TeamDetailContract.View,
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun checkFavorite(isFavorite: Boolean) {
         if (isFavorite) {
             isCheck = isFavorite

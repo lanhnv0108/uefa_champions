@@ -17,7 +17,9 @@ import com.sun.uefascore.screen.playerdetail.PlayerDetailFragment
 import com.sun.uefascore.screen.topscorers.adapter.TopScorersAdapter
 import com.sun.uefascore.utils.Constant
 import com.sun.uefascore.utils.OnItemRecyclerViewClickListener
+import kotlinx.android.synthetic.main.fragment_favorite.*
 import kotlinx.android.synthetic.main.fragment_top_scorers.*
+import kotlinx.android.synthetic.main.fragment_top_scorers.swipeRefreshData
 import java.lang.Exception
 
 class TopScorersFragment : Fragment(), TopScorersContract.View,
@@ -47,10 +49,12 @@ class TopScorersFragment : Fragment(), TopScorersContract.View,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+        reloadData()
     }
 
     override fun onGetTopScorerSuccess(topScorers: MutableList<TopScorer>) {
         adapter.updateData(topScorers)
+        swipeRefreshData.isRefreshing = false
     }
 
     override fun onError(exception: Exception) {
@@ -73,6 +77,12 @@ class TopScorersFragment : Fragment(), TopScorersContract.View,
         presenter.run {
             setView(this@TopScorersFragment)
             season?.let { getTopScorer(it) }
+        }
+    }
+
+    private fun reloadData() {
+        swipeRefreshData.setOnRefreshListener {
+            initData()
         }
     }
 
