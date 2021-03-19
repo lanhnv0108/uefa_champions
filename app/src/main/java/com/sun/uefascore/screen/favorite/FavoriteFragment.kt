@@ -13,6 +13,7 @@ import com.sun.uefascore.data.source.repository.FavoriteRepository
 import com.sun.uefascore.screen.favorite.adapter.FavoriteAdapter
 import com.sun.uefascore.screen.favorite.adapter.OnFavoriteRecyclerViewClickListener
 import com.sun.uefascore.screen.teamdetail.TeamDetailFragment
+import com.sun.uefascore.utils.OnFavoriteListener
 import com.sun.uefascore.utils.addFragment
 import kotlinx.android.synthetic.main.fragment_favorite.*
 import kotlinx.android.synthetic.main.fragment_favorite.swipeRefreshData
@@ -20,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_search_team.*
 import kotlinx.android.synthetic.main.fragment_standing.*
 
 class FavoriteFragment : Fragment(), FavoriteContract.View,
-    OnFavoriteRecyclerViewClickListener {
+    OnFavoriteRecyclerViewClickListener, OnFavoriteListener {
 
     private val adapter: FavoriteAdapter by lazy {
         FavoriteAdapter()
@@ -33,6 +34,7 @@ class FavoriteFragment : Fragment(), FavoriteContract.View,
         )
     }
     private var season: String? = null
+    private var onFavoriteListener: OnFavoriteListener? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,13 +51,45 @@ class FavoriteFragment : Fragment(), FavoriteContract.View,
         reloadData()
     }
 
-    override fun onDeleteTeamLocalSuccess() {}
+    override fun onDeleteTeamLocalSuccess() {
+        presenter.onGetFavorites()
+    }
 
-    override fun onDeletePlayersLocalSuccess() = Unit
+    override fun onDeletePlayersLocalSuccess() {
+        presenter.onGetFavorites()
+    }
 
     override fun onGetFavoritesSuccess(teamDetails: MutableList<TeamDetail>) {
         adapter.updateData(teamDetails)
         swipeRefreshData.isRefreshing = false
+    }
+
+    override fun onFailed(idMessage: Int) {
+        Toast.makeText(context, getString(idMessage), Toast.LENGTH_LONG).show()
+    }
+
+    override fun onClickItemListener(item: TeamDetail) {
+        addFragment(
+            TeamDetailFragment.newInstance(item.id.toString(), season).apply {
+                registerFavoriteListener(this@FavoriteFragment)
+            },
+            R.id.containerLayout
+        )
+    }
+
+    override fun onClickFavoriteListener(item: TeamDetail) {
+        presenter.apply {
+            onDeletePlayersLocal(item.id.toString())
+            onDeleteTeamLocal(item.id.toString())
+        }
+    }
+
+    override fun onClickFavoriteListener() {
+        this.onFavoriteListener?.onClickFavoriteListener()
+    }
+
+    fun registerFavoriteListener(onFavoriteListener: OnFavoriteListener) {
+        this.onFavoriteListener = onFavoriteListener
     }
 
     private fun initView() {
@@ -70,26 +104,7 @@ class FavoriteFragment : Fragment(), FavoriteContract.View,
         }
     }
 
-    override fun onFailed(idMessage: Int) {
-        Toast.makeText(context, getString(idMessage), Toast.LENGTH_LONG).show()
-    }
-
-    override fun onClickItemListener(item: TeamDetail) {
-        addFragment(
-            TeamDetailFragment.newInstance(item.id.toString(), season),
-            R.id.containerLayout
-        )
-    }
-
-    override fun onClickFavoriteListener(item: TeamDetail) {
-        presenter.apply {
-            onDeletePlayersLocal(item.id.toString())
-            onDeleteTeamLocal(item.id.toString())
-            onGetFavorites()
-        }
-    }
-
-    fun onClickFavoriteListener() {
+    fun onUpdateFavorite() {
         initData()
     }
 
