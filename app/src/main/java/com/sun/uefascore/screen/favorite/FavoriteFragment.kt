@@ -15,6 +15,9 @@ import com.sun.uefascore.screen.favorite.adapter.OnFavoriteRecyclerViewClickList
 import com.sun.uefascore.screen.teamdetail.TeamDetailFragment
 import com.sun.uefascore.utils.addFragment
 import kotlinx.android.synthetic.main.fragment_favorite.*
+import kotlinx.android.synthetic.main.fragment_favorite.swipeRefreshData
+import kotlinx.android.synthetic.main.fragment_search_team.*
+import kotlinx.android.synthetic.main.fragment_standing.*
 
 class FavoriteFragment : Fragment(), FavoriteContract.View,
     OnFavoriteRecyclerViewClickListener {
@@ -31,15 +34,6 @@ class FavoriteFragment : Fragment(), FavoriteContract.View,
     }
     private var season: String? = null
 
-    fun onClickFavoriteListener() {
-        initData()
-    }
-
-    fun updateSeason(season: String) {
-        this.season = season
-        initData()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -52,6 +46,7 @@ class FavoriteFragment : Fragment(), FavoriteContract.View,
         super.onViewCreated(view, savedInstanceState)
         initView()
         initData()
+        reloadData()
     }
 
     override fun onDeleteTeamLocalSuccess() {}
@@ -60,6 +55,7 @@ class FavoriteFragment : Fragment(), FavoriteContract.View,
 
     override fun onGetFavoritesSuccess(teamDetails: MutableList<TeamDetail>) {
         adapter.updateData(teamDetails)
+        swipeRefreshData.isRefreshing = false
     }
 
     private fun initView() {
@@ -90,6 +86,21 @@ class FavoriteFragment : Fragment(), FavoriteContract.View,
             onDeletePlayersLocal(item.id.toString())
             onDeleteTeamLocal(item.id.toString())
             onGetFavorites()
+        }
+    }
+
+    fun onClickFavoriteListener() {
+        initData()
+    }
+
+    fun updateSeason(season: String) {
+        this.season = season
+        initData()
+    }
+
+    private fun reloadData() {
+        swipeRefreshData.setOnRefreshListener {
+            initData()
         }
     }
 
