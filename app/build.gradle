@@ -10,7 +10,7 @@ android {
     compileSdkVersion 29
 
     defaultConfig {
-        applicationId "com.sun.uefascore"
+        applicationId "com.lanh.uefachampions"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
