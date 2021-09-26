@@ -9,6 +9,7 @@ import androidx.viewpager.widget.ViewPager
 import com.lanh.uefachampions.R
 import com.lanh.uefachampions.screen.favorite.FavoriteFragment
 import com.lanh.uefachampions.screen.fixtures.FixturesFragment
+import com.lanh.uefachampions.screen.news.NewsFragment
 import com.lanh.uefachampions.screen.standing.StandingFragment
 import com.lanh.uefachampions.screen.topscorers.TopScorersFragment
 import com.lanh.uefachampions.utils.Constant
@@ -21,6 +22,7 @@ import kotlinx.android.synthetic.main.fragment_home_page.*
 class HomePageFragment : Fragment(), OnGetSeasonListener, OnFavoriteListener {
 
     private val fragments = mutableListOf<Fragment>()
+    private val newsFragment = NewsFragment.newInstance()
     private val fixturesFragment = FixturesFragment.newInstance()
     private val standingFragment = StandingFragment.newInstance()
     private val topScorersFragment = TopScorersFragment.newInstance()
@@ -62,6 +64,7 @@ class HomePageFragment : Fragment(), OnGetSeasonListener, OnFavoriteListener {
     private fun initFragment() {
         fragments.apply {
             add(MenuItem.FIXTURES.ordinal, fixturesFragment)
+            add(MenuItem.NEWS.ordinal, newsFragment)
             add(MenuItem.STANDING.ordinal, standingFragment)
             add(MenuItem.SCORERS.ordinal, topScorersFragment)
             add(MenuItem.FAVORITE.ordinal, favoriteFragment)
@@ -73,6 +76,10 @@ class HomePageFragment : Fragment(), OnGetSeasonListener, OnFavoriteListener {
             when (it.itemId) {
                 R.id.homeItem -> {
                     viewPagerContainer.currentItem = MenuItem.FIXTURES.ordinal
+                    true
+                }
+                R.id.newsItem -> {
+                    viewPagerContainer.currentItem = MenuItem.NEWS.ordinal
                     true
                 }
                 R.id.standingItem -> {

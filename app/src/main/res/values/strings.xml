@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">UEFA Score</string>
-    <string name="fixtures">Fixtures</string>
-    <string name="standing">Standing</string>
-    <string name="top_scorers">Top Scorers</string>
-    <string name="favorites">Favorites</string>
+    <string name="fixtures">Trận đấu</string>
+    <string name="standing">BXH</string>
+    <string name="top_scorers">BXH cầu thủ</string>
+    <string name="favorites">Yêu thích</string>
     <string name="tittle_main">UEFA Champions league</string>
     <string name="search_team">Search team</string>
     <string name="shots_on_goal">Shots on Goal</string>
@@ -38,4 +38,5 @@
     <string name="failed_to_delete">Failed to delete</string>
     <string name="back_again_to_exit">Back again to exit </string>
     <string name="upcoming">Upcoming</string>
+    <string name="news">Tin tức</string>
 </resources>
