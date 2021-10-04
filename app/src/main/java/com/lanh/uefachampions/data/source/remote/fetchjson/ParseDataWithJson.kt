@@ -1,10 +1,7 @@
 package com.lanh.uefachampions.data.source.remote.fetchjson
 
 import com.lanh.uefachampions.BuildConfig
-import com.lanh.uefachampions.data.model.FixtureEntry
-import com.lanh.uefachampions.data.model.StandingGroupEntry
-import com.lanh.uefachampions.data.model.StandingLeagueEntry
-import com.lanh.uefachampions.data.model.TeamDetailEntry
+import com.lanh.uefachampions.data.model.*
 import com.lanh.uefachampions.utils.Constant
 import com.lanh.uefachampions.utils.TypeModel
 import org.json.JSONArray
@@ -103,6 +100,12 @@ class ParseDataWithJson {
                         typeModel
                     )
                 }
+                TypeModel.NEWS -> {
+                    parseJsonToList(
+                        JSONObject(jsonString).getJSONArray(NewsEntry.DATA),
+                        typeModel
+                    )
+                }
                 else -> null
             }
         } catch (e: Exception) {
@@ -137,6 +140,9 @@ class ParseDataWithJson {
             }
             TypeModel.TEAM_SEARCH -> {
                 parseJsonToModel.parseJsonToTeamSearch(json as JSONObject)
+            }
+            TypeModel.NEWS -> {
+                parseJsonToModel.parseJsonToNews(json as JSONObject?)
             }
             else -> null
         }
