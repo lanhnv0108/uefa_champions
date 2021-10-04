@@ -165,4 +165,14 @@ class ParseJsonToModel {
                 logo = getJSONObject(TeamDetailEntry.TEAM).getString(TeamDetailEntry.LOGO)
             )
         }
+
+    fun parseJsonToNews(jsonObject: JSONObject?): News? =
+        jsonObject?.run {
+            News(
+                title = getString(NewsEntry.TITLE),
+                image = getString(NewsEntry.IMAGE),
+                published = getString(NewsEntry.PUBLISHED),
+                slug = getString(NewsEntry.SLUG)
+            )
+        }
 }
