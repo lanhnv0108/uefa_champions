@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardViewNews"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:cardCornerRadius="@dimen/dp_5"
+        app:cardElevation="0dp"
+        app:layout_constraintDimensionRatio="371:96"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="1.0"
+        tools:targetApi="lollipop">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageViewNews"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="120:80"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.32" />
+
+            <TextView
+                android:id="@+id/textViewNameNews"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/dp_12"
+                android:fontFamily="@font/gilroy_bold"
+                android:textColor="@color/color_black_text"
+                android:lineHeight="@dimen/sp_18"
+                android:textAlignment="viewStart"
+                app:layout_constraintDimensionRatio="239:54"
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintStart_toEndOf="@id/imageViewNews"
+                app:layout_constraintTop_toTopOf="@id/imageViewNews"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintWidth_percent="0.64"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageViewTime"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/ic_lock"
+                android:layout_marginStart="@dimen/dp_12"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toEndOf="@id/imageViewNews"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewNameNews"
+                app:layout_constraintWidth_percent="0.05" />
+
+            <TextView
+                android:id="@+id/textViewTime"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:fontFamily="@font/gilroy_medium"
+                android:textColor="@color/color_black_text"
+                android:lineHeight="@dimen/sp_30"
+                android:text="45 phút trước"
+                android:layout_marginStart="@dimen/dp_8"
+                android:textAlignment="viewStart"
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintHorizontal_bias="0.394"
+                app:layout_constraintStart_toEndOf="@id/imageViewTime"
+                app:layout_constraintTop_toTopOf="@id/imageViewTime"
+                app:layout_constraintBottom_toBottomOf="@id/imageViewTime"
+                app:layout_constraintVertical_bias="0.22" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

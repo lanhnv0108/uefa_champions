@@ -101,7 +101,9 @@ class FixturesFragment : Fragment(), ContractFixture.View, AdapterView.OnItemSel
             adapter = this@FixturesFragment.fixtureAdapter
         }
         recyclerViewFixtureHistory.apply {
+            setHasFixedSize(true)
             adapter = this@FixturesFragment.fixtureAllAdapter
+
         }
     }
 
