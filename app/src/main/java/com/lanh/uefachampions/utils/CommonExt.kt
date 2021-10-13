@@ -7,11 +7,19 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 
 fun ImageView.loadImageUrl(url: String) {
     LoadImageUrl {
         this.setImageBitmap(it)
     }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, url)
+}
+
+fun ImageView.loadUrl(url: String) {
+    Glide.with(context)
+        .load(url)
+        .centerCrop()
+        .into(this)
 }
 
 fun Fragment.hideKeyboard() {

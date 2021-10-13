@@ -10,12 +10,15 @@ class NewsPresenter internal constructor(private val repository: NewsRepository?
     private var view: ContractNews.View? = null
 
     override fun getNews() {
+        view?.showLoading()
         repository?.getNews(object : OnFetchDataJsonListener<MutableList<News>>{
             override fun onSuccess(data: MutableList<News>) {
+                view?.hiddenLoading()
                 view?.onGetNewsSuccess(data)
             }
 
             override fun onError(exception: Exception?) {
+                view?.hiddenLoading()
                 view?.onError(exception)
             }
         })
