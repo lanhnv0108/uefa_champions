@@ -3,29 +3,39 @@ package com.lanh.uefachampions.screen.fixtures
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.SearchView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import com.lanh.uefachampions.R
 import com.lanh.uefachampions.data.model.Fixture
 import com.lanh.uefachampions.data.source.repository.FixtureRepository
+import com.lanh.uefachampions.databinding.FragmentFixturesBinding
+import com.lanh.uefachampions.screen.base.BaseFragment
+import com.lanh.uefachampions.screen.fixtures.adapter.DateAdapter
 import com.lanh.uefachampions.screen.fixtures.adapter.FixtureAdapter
 import com.lanh.uefachampions.screen.fixtures.adapter.FixtureAllAdapter
 import com.lanh.uefachampions.screen.searchteam.SearchFragment
 import com.lanh.uefachampions.screen.teamdetail.TeamDetailFragment
 import com.lanh.uefachampions.utils.*
+import com.lanh.uefachampions.utils.datetime.getListDateInMonth
 import kotlinx.android.synthetic.main.fragment_fixtures.*
+import org.joda.time.DateTime
 import java.text.SimpleDateFormat
 import java.util.*
 
-@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class FixturesFragment : Fragment(), ContractFixture.View, AdapterView.OnItemSelectedListener,
+class FixturesFragment : BaseFragment<FragmentFixturesBinding, ContractFixture.Presenter>(),
+    ContractFixture.View, AdapterView.OnItemSelectedListener,
     OnFavoriteListener {
+    override val layoutId: Int
+        get() = R.layout.fragment_fixtures
+
+    override val presenter: ContractFixture.Presenter by lazy {
+        FixturePresenter(
+            FixtureRepository.instance
+        )
+    }
 
     private var season = ""
     private var dayByPicker = ""
@@ -34,29 +44,22 @@ class FixturesFragment : Fragment(), ContractFixture.View, AdapterView.OnItemSel
     private var onGetSeasonListener: OnGetSeasonListener? = null
     private val fixtureAdapter by lazy { FixtureAdapter() }
     private val fixtureAllAdapter by lazy { FixtureAllAdapter() }
-    private val fixturePresenter: ContractFixture.Presenter by lazy {
-        FixturePresenter(
-            FixtureRepository.instance
-        )
+
+    private val dateAdapter by lazy {
+        DateAdapter({
+
+        })
     }
 
     override fun onClickFavoriteListener() {
         onFavoriteListener?.onClickFavoriteListener()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_fixtures, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initPresenter()
         initDate()
-        initView()
         searchTeam()
         onClickItem()
         onClickDatePicker()
@@ -89,14 +92,15 @@ class FixturesFragment : Fragment(), ContractFixture.View, AdapterView.OnItemSel
         val date = Date()
         val formatter = SimpleDateFormat(Constant.DAY_FORMAT)
         dayDevice = formatter.format(date)
-        fixturePresenter.apply {
+        presenter.apply {
             setView(this@FixturesFragment)
             getFixture(dayDevice, season)
             getSeason()
         }
     }
 
-    private fun initView() {
+    override fun initView() {
+        rcvDatePicker.adapter = dateAdapter
         recyclerViewFixtureOfDay.apply {
             adapter = this@FixturesFragment.fixtureAdapter
         }
@@ -110,6 +114,7 @@ class FixturesFragment : Fragment(), ContractFixture.View, AdapterView.OnItemSel
     @SuppressLint("SimpleDateFormat")
     private fun initDate() {
         val date = Date()
+        dateAdapter.submitList(DateTime.now().getListDateInMonth())
         val formatter = SimpleDateFormat(Constant.DAY_FORMAT)
         val dayDevice = formatter.format(date)
         dayByPicker = dayDevice
@@ -200,7 +205,7 @@ class FixturesFragment : Fragment(), ContractFixture.View, AdapterView.OnItemSel
                     )
                     dayByPicker = stringDate
                     textViewDayOfMatches.text = stringDate
-                    fixturePresenter.apply {
+                    presenter.apply {
                         setView(this@FixturesFragment)
                         getFixture(stringDate, season)
                     }
@@ -227,7 +232,7 @@ class FixturesFragment : Fragment(), ContractFixture.View, AdapterView.OnItemSel
 
     private fun reloadData() {
         swipeRefreshData.setOnRefreshListener {
-            fixturePresenter.apply {
+            presenter.apply {
                 getAllFixture(season)
             }
         }
@@ -237,7 +242,7 @@ class FixturesFragment : Fragment(), ContractFixture.View, AdapterView.OnItemSel
         val seasonSpinner = p?.selectedItem.toString()
         textViewSeason.text = seasonSpinner
         season = seasonSpinner
-        fixturePresenter.apply {
+        presenter.apply {
             setView(this@FixturesFragment)
             getAllFixture(season)
             getFixture(dayByPicker, season)
