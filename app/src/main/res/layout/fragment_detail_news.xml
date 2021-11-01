@@ -1,17 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout>
+    <data>
+        <variable
+            name="newDetails"
+            type="com.lanh.uefachampions.data.model.NewsDetail" />
+    </data>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/green_haze">
+    android:background="@color/color_white">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutDetailNews"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Chi tiết bài báo"
-        android:textSize="@dimen/sp_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:paddingBottom="@dimen/dp_36">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageViewNewsDetail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            loadImageUrl="@{newDetails.image.url}"
+            app:layout_constraintDimensionRatio="411:260"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="1.0" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewDetailNews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:fontFamily="@font/gilroy_bold"
+            android:lineHeight="@dimen/dp_36"
+            android:paddingStart="@dimen/dp_20"
+            android:paddingEnd="@dimen/dp_20"
+            android:text="@{newDetails.title}"
+            android:textColor="@color/color_black_text"
+            android:textSize="@dimen/sp_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageViewNewsDetail" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageViewTime"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_16"
+            android:background="@drawable/ic_lock"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewDetailNews"
+            app:layout_constraintWidth_percent="0.05" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewPublished"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_8"
+            android:fontFamily="@font/gilroy_bold"
+            android:paddingStart="@dimen/dp_20"
+            android:paddingEnd="@dimen/dp_20"
+            android:text="@{newDetails.published}"
+            android:textAlignment="textStart"
+            android:textColor="@color/color_black_text"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toBottomOf="@id/imageViewTime"
+            app:layout_constraintStart_toEndOf="@id/imageViewTime"
+            app:layout_constraintTop_toTopOf="@id/imageViewTime" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewArticle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_24"
+            android:fontFamily="@font/gilroy_regular"
+            android:paddingStart="@dimen/dp_20"
+            android:paddingEnd="@dimen/dp_20"
+            android:text="@{newDetails.convertArticleToText()}"
+            android:textColor="@color/color_black_text"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintTop_toBottomOf="@id/textViewPublished" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+</layout>
