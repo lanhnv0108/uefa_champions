@@ -1,161 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@null"
-    tools:context=".screen.main.MainActivity">
+<layout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayoutFixtures"
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@null"
+        tools:context=".screen.main.MainActivity">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guidelineLeft"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.07" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imageViewLogo"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/dp_28"
-            android:background="@drawable/logo_champion"
-            android:scaleType="centerCrop"
-            app:layout_constraintDimensionRatio="54:52"
-            app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.13" />
-
-        <Spinner
-            android:id="@+id/spinnerSeason"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/dp_13"
-            android:layout_marginEnd="@dimen/dp_25"
-            app:layout_constraintDimensionRatio="25:25"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imageViewLogo"
-            app:layout_constraintWidth_percent="0.1" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textViewSeason"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_30"
-            android:layout_marginEnd="@dimen/dp_5"
-            android:textAlignment="textEnd"
-            android:textColor="@color/color_orange_white"
-            app:layout_constraintEnd_toStartOf="@+id/spinnerSeason"
-            app:layout_constraintTop_toBottomOf="@+id/imageViewLogo" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textViewFixture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_8"
-            android:fontFamily="@font/sf_compact_bold"
-            android:text="@string/fixtures"
-            android:textColor="@color/color_orange_white"
-            android:textSize="@dimen/sp_24"
-            app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-            app:layout_constraintTop_toBottomOf="@id/imageViewLogo" />
-
-        <SearchView
-            android:id="@+id/searchViewTeam"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/dp_28"
-            android:background="@drawable/background_search"
-            android:closeIcon="@android:color/transparent"
-            android:iconifiedByDefault="false"
-            android:queryBackground="@android:color/transparent"
-            android:queryHint="@string/search_team"
-            android:searchIcon="@drawable/ic_search"
-            android:theme="@style/ThemeOverlay.search"
-            app:layout_constraintDimensionRatio="351:49"
-            app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-            app:layout_constraintTop_toBottomOf="@+id/textViewFixture"
-            app:layout_constraintWidth_percent="0.85" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textViewLiveMatches"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_28"
-            android:fontFamily="@font/sf_compact_bold"
-            android:text="@string/live_matches"
-            android:textColor="@color/color_black"
-            android:textSize="@dimen/sp_24"
-            app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-            app:layout_constraintTop_toBottomOf="@id/searchViewTeam" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textViewDayOfMatches"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_35"
-            android:textColor="@color/color_orange_white"
-            app:layout_constraintEnd_toStartOf="@id/imageViewCalendar"
-            app:layout_constraintHorizontal_bias="0.8"
-            app:layout_constraintStart_toEndOf="@id/textViewLiveMatches"
-            app:layout_constraintTop_toBottomOf="@id/searchViewTeam" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imageViewCalendar"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/dp_31"
-            android:layout_marginEnd="@dimen/dp_30"
-            android:background="@drawable/ic_calendar"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/searchViewTeam"
-            app:layout_constraintWidth_percent="0.05" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewFixtureOfDay"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutFixtures"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/dp_23"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintDimensionRatio="411:133"
-            app:layout_constraintTop_toBottomOf="@id/textViewLiveMatches"
-            tools:listitem="@layout/item_fixture_of_day" />
+            android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textViewFixtureHistory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_28"
-            android:fontFamily="@font/sf_compact_bold"
-            android:text="@string/history_matches"
-            android:textColor="@color/color_black"
-            android:textSize="@dimen/sp_24"
-            app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-            app:layout_constraintTop_toBottomOf="@id/recyclerViewFixtureOfDay" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.07" />
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipeRefreshData"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/dp_23"
-            app:layout_constraintDimensionRatio="411:600"
-            app:layout_constraintTop_toBottomOf="@id/textViewFixtureHistory">
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageViewLogo"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/dp_28"
+                android:background="@drawable/logo_champion"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio="54:52"
+                app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.13" />
+
+            <Spinner
+                android:id="@+id/spinnerSeason"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/dp_13"
+                android:layout_marginEnd="@dimen/dp_25"
+                app:layout_constraintDimensionRatio="25:25"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageViewLogo"
+                app:layout_constraintWidth_percent="0.1" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewSeason"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_30"
+                android:layout_marginEnd="@dimen/dp_5"
+                android:textAlignment="textEnd"
+                android:textColor="@color/color_orange_white"
+                app:layout_constraintEnd_toStartOf="@+id/spinnerSeason"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewLogo" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewFixture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:fontFamily="@font/sf_compact_bold"
+                android:text="@string/fixtures"
+                android:textColor="@color/color_orange_white"
+                android:textSize="@dimen/sp_24"
+                app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+                app:layout_constraintTop_toBottomOf="@id/imageViewLogo" />
+
+            <SearchView
+                android:id="@+id/searchViewTeam"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/dp_28"
+                android:background="@drawable/background_search"
+                android:closeIcon="@android:color/transparent"
+                android:iconifiedByDefault="false"
+                android:queryBackground="@android:color/transparent"
+                android:queryHint="@string/search_team"
+                android:searchIcon="@drawable/ic_search"
+                android:theme="@style/ThemeOverlay.search"
+                app:layout_constraintDimensionRatio="351:49"
+                app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+                app:layout_constraintTop_toBottomOf="@+id/textViewFixture"
+                app:layout_constraintWidth_percent="0.85" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewLiveMatches"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_28"
+                android:fontFamily="@font/sf_compact_bold"
+                android:text="@string/live_matches"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/sp_24"
+                app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+                app:layout_constraintTop_toBottomOf="@id/searchViewTeam" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewDayOfMatches"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_35"
+                android:textColor="@color/color_orange_white"
+                app:layout_constraintEnd_toStartOf="@id/imageViewCalendar"
+                app:layout_constraintHorizontal_bias="0.8"
+                app:layout_constraintStart_toEndOf="@id/textViewLiveMatches"
+                app:layout_constraintTop_toBottomOf="@id/searchViewTeam" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageViewCalendar"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/dp_31"
+                android:layout_marginEnd="@dimen/dp_30"
+                android:background="@drawable/ic_calendar"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/searchViewTeam"
+                app:layout_constraintWidth_percent="0.05" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewFixtureHistory"
+                android:id="@+id/recyclerViewFixtureOfDay"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/dp_23"
+                android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintDimensionRatio="411:133"
+                app:layout_constraintTop_toBottomOf="@id/textViewLiveMatches"
                 tools:listitem="@layout/item_fixture_of_day" />
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewFixtureHistory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_28"
+                android:fontFamily="@font/sf_compact_bold"
+                android:text="@string/history_matches"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/sp_24"
+                app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+                app:layout_constraintTop_toBottomOf="@id/recyclerViewFixtureOfDay" />
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipeRefreshData"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/dp_23"
+                app:layout_constraintDimensionRatio="411:600"
+                app:layout_constraintTop_toBottomOf="@id/textViewFixtureHistory">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewFixtureHistory"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_fixture_of_day" />
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvDatePicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+                app:layout_constraintTop_toBottomOf="@id/swipeRefreshData" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
