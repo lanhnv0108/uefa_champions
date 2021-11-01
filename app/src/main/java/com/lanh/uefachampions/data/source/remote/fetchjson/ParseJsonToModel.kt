@@ -169,6 +169,7 @@ class ParseJsonToModel {
     fun parseJsonToNews(jsonObject: JSONObject?): News? =
         jsonObject?.run {
             News(
+                id = getString("id"),
                 title = getString(NewsEntry.TITLE),
                 image = getString(NewsEntry.IMAGE),
                 published = getString(NewsEntry.PUBLISHED),

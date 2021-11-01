@@ -1,12 +1,30 @@
 package com.lanh.uefachampions.data.model
 
-data class News (
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
+
+data class News(
+    @Expose
+    @SerializedName("id")
+    val id: String,
+    @Expose
+    @SerializedName("title")
     val title: String?,
+
+    @Expose
+    @SerializedName("image")
     val image: String?,
+
+    @Expose
+    @SerializedName("published")
     val published: String?,
+
+    @Expose
+    @SerializedName("slug")
     val slug: String?
 )
-object NewsEntry{
+
+object NewsEntry {
     const val DATA = "data"
     const val TITLE = "title"
     const val IMAGE = "image"
