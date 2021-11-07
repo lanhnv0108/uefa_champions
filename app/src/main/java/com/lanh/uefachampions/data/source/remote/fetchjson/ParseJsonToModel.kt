@@ -176,4 +176,26 @@ class ParseJsonToModel {
                 slug = getString(NewsEntry.SLUG)
             )
         }
+
+//    fun parseJsonToNewsDetail(jsonObject: JSONObject?): NewsDetail? =
+//        jsonObject?.run {
+//            val parseDataWithJson = ParseDataWithJson()
+//            val article = parseDataWithJson.parseJsonToList(
+//                jsonObject.getJSONArray("article"),
+//                TypeModel.ARTICLE
+//            ) as MutableList<Article>
+//            NewsDetail(
+//                title = getString(NewsDetailEntry.TITLE),
+//                image = getJSONObject(NewsDetailEntry.IMAGE).getString(NewsDetailEntry.URL),
+//                published = getString(NewsDetailEntry.PUBLISHED),
+//                article = article
+//            )
+//        }
+//
+//    fun parseJsonToArticle(jsonObject: JSONObject?): Article? =
+//        jsonObject?.run {
+//            Article(
+//                p = getString(ArticleEntry.P)
+//            )
+//        }
 }

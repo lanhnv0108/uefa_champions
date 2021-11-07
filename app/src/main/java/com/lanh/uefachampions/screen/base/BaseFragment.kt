@@ -22,13 +22,14 @@ abstract class BaseFragment<B : ViewDataBinding, P : BasePresenter<*>> : Fragmen
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, layoutId, container, true)
+        binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+        initPresenter()
         handlerEvent()
     }
 
@@ -38,5 +39,6 @@ abstract class BaseFragment<B : ViewDataBinding, P : BasePresenter<*>> : Fragmen
     }
 
     open fun initView() {}
+    open fun initPresenter() {}
     open fun handlerEvent() {}
 }

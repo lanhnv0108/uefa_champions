@@ -30,6 +30,10 @@ class ParseStringToObject {
                         result,
                         object : TypeToken<BaseDataApiNews<List<News>>>() {}.type
                     )?.data
+                TypeModel.DETAIL_NEWS -> convertJsonToObject<BaseDataApiNews<NewsDetail>>(
+                    result,
+                    object : TypeToken<BaseDataApiNews<NewsDetail>>() {}.type
+                )?.data
                 else -> null
             }
         } catch (e: Throwable) {

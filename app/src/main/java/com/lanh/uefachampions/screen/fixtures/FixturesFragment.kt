@@ -88,7 +88,7 @@ class FixturesFragment : BaseFragment<FragmentFixturesBinding, ContractFixture.P
     }
 
     @SuppressLint("SimpleDateFormat")
-    private fun initPresenter() {
+    override fun initPresenter() {
         val date = Date()
         val formatter = SimpleDateFormat(Constant.DAY_FORMAT)
         dayDevice = formatter.format(date)

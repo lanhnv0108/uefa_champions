@@ -90,7 +90,7 @@ class NewsFragment : Fragment(), ContractNews.View {
         newsAdapter.apply {
             registerNewsClickListener {
                 addFragment(
-                    DetailNewsFragment(), R.id.containerLayout
+                    DetailNewsFragment.newInstance(it.slug), R.id.containerLayout
                 )
             }
         }
