@@ -1,6 +1,7 @@
 package com.lanh.uefachampions.data.model
 
 data class TopScorer(
+    val index: String? = null,
     val player: Player?,
     val statistic: Statistic?
 )

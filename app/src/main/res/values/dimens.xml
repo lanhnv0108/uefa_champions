@@ -28,4 +28,5 @@
     <dimen name="dp_410">410dp</dimen>
     <dimen name="dp_32">32dp</dimen>
     <dimen name="dp_16">16dp</dimen>
+    <dimen name="dp_160">160dp</dimen>
 </resources>

@@ -20,6 +20,7 @@ import com.lanh.uefachampions.screen.teamdetail.adapter.PlayerAdapter
 import com.lanh.uefachampions.utils.LoadImageUrl
 import com.lanh.uefachampions.utils.OnFavoriteListener
 import com.lanh.uefachampions.utils.OnItemRecyclerViewClickListener
+import com.lanh.uefachampions.utils.loadUrl
 import kotlinx.android.synthetic.main.fragment_team_detail.*
 
 @Suppress("DEPRECATION")
@@ -62,9 +63,7 @@ class TeamDetailFragment : Fragment(), TeamDetailContract.View,
         textViewCountry?.text = teamDetail.country
         textViewFounded?.text = teamDetail.founded.toString()
         textViewNameTeam?.text = teamDetail.name
-        LoadImageUrl {
-            imageViewLogo?.setImageBitmap(it)
-        }.execute(teamDetail.logo)
+        imageViewLogo.loadUrl(teamDetail.logo.toString())
         this.teamDetail = teamDetail
     }
 
