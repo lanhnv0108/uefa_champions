@@ -84,7 +84,7 @@ class FixturesFragment : BaseFragment<FragmentFixturesBinding, ContractFixture.P
     }
 
     override fun onError(exception: Exception?) {
-        Toast.makeText(context, exception?.message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, exception?.message ?: "", Toast.LENGTH_SHORT).show()
     }
 
     @SuppressLint("SimpleDateFormat")
