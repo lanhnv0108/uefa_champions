@@ -79,6 +79,8 @@ class FixturesFragment : BaseFragment<FragmentFixturesBinding, ContractFixture.P
     }
 
     override fun getSeasonSuccess(season: MutableList<String>) {
+        season.removeAt(season.lastIndex)
+        season.removeAt(season.lastIndex)
         season.reverse()
         initSpinner(season)
     }
