@@ -18,5 +18,6 @@
     <color name="color_black_text">#29282B</color>
     <color name="color_grey_text">#B0B0B0</color>
     <color name="alabaster">#F9F9F9</color>
+    <color name="alabaster_2">#FBFBFB</color>
     <color name="mine_shaft">#202020</color>
 </resources>

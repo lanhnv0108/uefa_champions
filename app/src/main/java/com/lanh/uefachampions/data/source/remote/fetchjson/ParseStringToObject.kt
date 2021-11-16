@@ -37,7 +37,7 @@ class ParseStringToObject {
                 else -> null
             }
         } catch (e: Throwable) {
-            if (BuildConfig.DEBUG) Log.e("expection", e.message)
+            if (BuildConfig.DEBUG) Log.e("expection", e.message ?: "")
             null
         }
     }

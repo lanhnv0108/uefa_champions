@@ -1,53 +1,35 @@
 package com.lanh.uefachampions.screen.standing
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import com.lanh.uefachampions.R
 import com.lanh.uefachampions.data.model.StandingLeague
 import com.lanh.uefachampions.data.model.Team
 import com.lanh.uefachampions.data.source.repository.StandingRepository
+import com.lanh.uefachampions.databinding.FragmentStandingBinding
+import com.lanh.uefachampions.screen.base.BaseFragment
 import com.lanh.uefachampions.screen.standing.adapter.StandingGroupAdapter
 import com.lanh.uefachampions.screen.teamdetail.TeamDetailFragment
 import com.lanh.uefachampions.utils.OnFavoriteListener
-import com.lanh.uefachampions.utils.OnItemRecyclerViewClickListener
 import com.lanh.uefachampions.utils.addFragment
 import kotlinx.android.synthetic.main.fragment_standing.*
 import kotlin.Exception
 
-@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class StandingFragment : Fragment(),
-    StandingContract.View,
-    OnItemRecyclerViewClickListener<Team>, OnFavoriteListener {
-
-    private var season = ""
-    private val presenter by lazy {
+class StandingFragment : BaseFragment<FragmentStandingBinding, StandingContract.Presenter>(),
+    StandingContract.View, OnFavoriteListener {
+    override val layoutId: Int
+        get() = R.layout.fragment_standing
+    override val presenter by lazy {
         StandingPresenter(StandingRepository.instance)
     }
     private val adapter: StandingGroupAdapter by lazy {
-        StandingGroupAdapter()
+        StandingGroupAdapter(::onItemTeamClick)
     }
     private var onFavoriteListener: OnFavoriteListener? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_standing, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initView()
-        reloadData()
-    }
+    private var season = ""
 
     override fun onGetStandingLeagueSuccess(standingLeague: StandingLeague) {
-        adapter.updateData(standingLeague.standingGroups)
+        adapter.submitList(standingLeague.standingGroups)
         swipeRefreshData.isRefreshing = false
     }
 
@@ -55,10 +37,10 @@ class StandingFragment : Fragment(),
         Toast.makeText(context, exception.message, Toast.LENGTH_SHORT).show()
     }
 
-    override fun onItemClickListener(item: Team?) {
+    private fun onItemTeamClick(item: Team) {
         addFragment(
             TeamDetailFragment.newInstance(
-                item?.id.toString(),
+                item.id.toString(),
                 season
             ).apply {
                 registerFavoriteListener(this@StandingFragment)
@@ -75,27 +57,32 @@ class StandingFragment : Fragment(),
         this.onFavoriteListener = onFavoriteListener
     }
 
-    private fun initView() {
+    override fun initView() {
         recyclerViewStandingGroup.adapter = adapter
-        adapter.registerItemRecyclerViewClickListener(this)
     }
 
     fun updateSeason(season: String) {
         this.season = season
-        initData()
+        getStandingLeague()
     }
 
-    private fun initData() {
+    override fun initPresenter() {
+        super.initPresenter()
         presenter.run {
             setView(this@StandingFragment)
             getStandingLeague(season)
         }
     }
 
-    private fun reloadData() {
+    override fun handlerEvent() {
+        super.handlerEvent()
         swipeRefreshData.setOnRefreshListener {
-            initData()
+            getStandingLeague()
         }
+    }
+
+    private fun getStandingLeague() {
+        presenter.getStandingLeague(season)
     }
 
     companion object {
