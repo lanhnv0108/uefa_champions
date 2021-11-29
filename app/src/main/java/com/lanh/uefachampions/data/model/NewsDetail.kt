@@ -15,10 +15,10 @@ data class NewsDetail(
     val published: String?,
     @Expose
     @SerializedName("article")
-    val article: Article?,
+    val article: List<Article>?,
     ) {
     fun convertArticleToText() =
-        listOfNotNull(article).joinToString(separator = "\n\n") { it.p ?: "" + "\n" + it.h ?: "" }
+        article?.joinToString(separator = "\n\n") { it.p ?: "" + "\n" + it.h ?: "" }
 }
 data class ImageData(
     @Expose
