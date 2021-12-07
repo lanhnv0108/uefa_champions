@@ -23,7 +23,6 @@ class HomePageFragment : BaseFragment<FragmentHomePageBinding, EmptyPresenter>()
         get() = R.layout.fragment_home_page
 
     override val presenter: EmptyPresenter by lazy { EmptyPresenter() }
-    private val fragments = mutableListOf<Fragment>()
     private val newsFragment = NewsFragment.newInstance()
     private val fixturesFragment = FixturesFragment.newInstance()
     private val standingFragment = StandingFragment.newInstance()
@@ -43,8 +42,7 @@ class HomePageFragment : BaseFragment<FragmentHomePageBinding, EmptyPresenter>()
     override fun initView() {
         super.initView()
         registerListener()
-        initFragment()
-        initViewPager()
+        replaceFragment(fixturesFragment, R.id.viewPagerContainer, false)
         initBottomItem()
     }
 
@@ -57,60 +55,33 @@ class HomePageFragment : BaseFragment<FragmentHomePageBinding, EmptyPresenter>()
         favoriteFragment.registerFavoriteListener(this)
     }
 
-
-    @SuppressLint("WrongConstant")
-    private fun initViewPager() {
-        with(binding.viewPagerContainer) {
-            adapter =
-                ViewPagerContainerAdapter(parentFragmentManager, lifecycle, fragments)
-            offscreenPageLimit = Constant.LIMIT_OFFSET
-        }
-    }
-
-    private fun initFragment() {
-        fragments.apply {
-            add(MenuItem.FIXTURES.ordinal, fixturesFragment)
-            add(MenuItem.NEWS.ordinal, newsFragment)
-            add(MenuItem.STANDING.ordinal, standingFragment)
-            add(MenuItem.SCORERS.ordinal, topScorersFragment)
-            add(MenuItem.FAVORITE.ordinal, favoriteFragment)
-        }
-    }
-
     private fun initBottomItem() {
         with(binding) {
             bottomNavigation.setOnItemSelectedListener {
                 when (it.itemId) {
                     R.id.homeItem -> {
-                        viewPagerContainer.currentItem = MenuItem.FIXTURES.ordinal
+                        replaceFragment(fixturesFragment, R.id.viewPagerContainer, false)
                         true
                     }
                     R.id.newsItem -> {
-                        viewPagerContainer.currentItem = MenuItem.NEWS.ordinal
+                        replaceFragment(newsFragment, R.id.viewPagerContainer, false)
                         true
                     }
                     R.id.standingItem -> {
-                        viewPagerContainer.currentItem = MenuItem.STANDING.ordinal
+                        replaceFragment(standingFragment, R.id.viewPagerContainer, false)
                         true
                     }
                     R.id.topScorersItem -> {
-                        viewPagerContainer.currentItem = MenuItem.SCORERS.ordinal
+                        replaceFragment(topScorersFragment, R.id.viewPagerContainer, false)
                         true
                     }
                     R.id.favoriteItem -> {
-                        viewPagerContainer.currentItem = MenuItem.FAVORITE.ordinal
+                        replaceFragment(favoriteFragment, R.id.viewPagerContainer, false)
                         true
                     }
                     else -> false
                 }
             }
-            viewPagerContainer.registerOnPageChangeCallback(object :
-                ViewPager2.OnPageChangeCallback() {
-                override fun onPageSelected(position: Int) {
-                    hideKeyboard()
-                    bottomNavigation.menu.getItem(position).isChecked = true
-                }
-            })
         }
     }
 

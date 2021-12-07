@@ -29,7 +29,10 @@ class DateSeasonViewHolder(parent: ViewGroup, private val itemDateSelected: (Dat
     }
 
     override fun bind(item: ItemDate) {
-        adapter.submitList(item.date.getListDateInMonth())
+        val dates = item.date.getListDateInMonth()
+        adapter.submitList(dates) {
+            binding.rcvDatePicker.scrollToPosition(dates.indexOf(item))
+        }
     }
 
     private fun itemDateClick(itemDate: ItemDate) {

@@ -2,6 +2,7 @@ package com.lanh.uefachampions.screen.fixtures
 
 import android.util.Log
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ConcatAdapter
 import com.lanh.uefachampions.R
 import com.lanh.uefachampions.data.model.Fixture
@@ -49,6 +50,7 @@ class FixturesFragment : BaseFragment<FragmentFixturesBinding, ContractFixture.P
         binding.rcvFixtures.adapter = adapter
         binding.rcvFixtures.itemAnimator = null
         dateSeasonAdapter.submitItem(ItemDate(dateCurrent, true))
+        dateSelected(dateCurrent)
     }
 
     override fun onGetFixtureSuccess(fixtures: MutableList<Fixture>) {
@@ -60,6 +62,7 @@ class FixturesFragment : BaseFragment<FragmentFixturesBinding, ContractFixture.P
     }
 
     override fun onGetAllFixtureSuccess(fixtures: MutableList<Fixture>) {
+        binding.layoutLoading.isVisible = false
         binding.swipeRefreshData.isRefreshing = false
         scheduleAdapter.submitList(
             scheduleAdapter.currentList.toMutableList().apply {
@@ -102,6 +105,7 @@ class FixturesFragment : BaseFragment<FragmentFixturesBinding, ContractFixture.P
         dateSeasonAdapter.currentList.firstOrNull()?.date = dateTime
         presenter.getFixture(dateTime.toString("YYYY-MM-dd", Locale.US), "2021")
         presenter.getAllFixture("2021")
+        binding.layoutLoading.isVisible = true
         scheduleAdapter.submitItem(ItemTextTitleSchedule(dateTime))
     }
 
