@@ -100,7 +100,6 @@ class StandingGroupViewHolder(parent: ViewGroup, private val onItemClick: (Team)
 
     override fun bind(item: StandingGroup) {
         super.bind(item)
-        binding.item = item
         adapterStanding.submitList(item.standings)
     }
 }

@@ -10,16 +10,17 @@ inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Fragmen
 }
 
 fun Fragment.addFragment(fragment: Fragment, id: Int) {
-    fragmentManager?.inTransaction {
+    parentFragmentManager.inTransaction {
         add(id, fragment)
         addToBackStack(null)
     }
 }
 
-fun Fragment.replaceFragment(fragment: Fragment, id: Int) {
-    fragmentManager?.inTransaction {
+fun Fragment.replaceFragment(fragment: Fragment, id: Int, isAddBackStack: Boolean = true) {
+    parentFragmentManager.inTransaction {
         replace(id, fragment)
-        addToBackStack(null)
+        if (isAddBackStack) addToBackStack(null)
+        this
     }
 }
 

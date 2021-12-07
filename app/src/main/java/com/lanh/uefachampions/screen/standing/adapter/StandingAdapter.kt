@@ -96,7 +96,6 @@ class StandingViewHolder(parent: ViewGroup, private val onItemClick: (Team) -> U
     ) {
     override fun bind(item: Standing) {
         super.bind(item)
-        binding.item = item
         binding.layoutTeam.setOnClickListener {
             item.team?.let { team -> onItemClick.invoke(team) }
         }
