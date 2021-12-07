@@ -105,7 +105,6 @@ class TopScorersViewHolder(private val layoutPlayerClick: (TopScorer) -> Unit, p
 
     override fun bind(item: TopScorer) {
         super.bind(item)
-        binding.item = item
         binding.layoutPlayer.setOnClickListener {
             layoutPlayerClick.invoke(item)
         }

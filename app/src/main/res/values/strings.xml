@@ -14,7 +14,7 @@
     <string name="passes">Passes</string>
     <string name="live_matches">Live Matches</string>
     <string name="view_all">View all</string>
-    <string name="live">LIVE</string>
+    <string name="live">Trực tiếp</string>
     <string name="history_matches">History Matches</string>
     <string name="title_rank">#</string>
     <string name="title_team">Đội bóng</string>
@@ -39,4 +39,6 @@
     <string name="back_again_to_exit">Back again to exit </string>
     <string name="upcoming">Upcoming</string>
     <string name="news">Tin tức</string>
+    <string name="live_en">Live</string>
+    <string name="schedule">Lịch %s</string>
 </resources>

@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId "com.lanh.uefachampions"
-        minSdkVersion 24
+        minSdkVersion 26
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -42,6 +42,7 @@ android {
 
     buildFeatures {
         dataBinding true
+        viewBinding true
     }
 }
 

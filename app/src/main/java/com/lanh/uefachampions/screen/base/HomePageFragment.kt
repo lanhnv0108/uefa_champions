@@ -1,12 +1,10 @@
 package com.lanh.uefachampions.screen.base
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.annotation.SuppressLint
 import androidx.fragment.app.Fragment
-import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import com.lanh.uefachampions.R
+import com.lanh.uefachampions.databinding.FragmentHomePageBinding
 import com.lanh.uefachampions.screen.favorite.FavoriteFragment
 import com.lanh.uefachampions.screen.fixtures.FixturesFragment
 import com.lanh.uefachampions.screen.news.NewsFragment
@@ -17,23 +15,20 @@ import com.lanh.uefachampions.utils.MenuItem
 import com.lanh.uefachampions.utils.OnFavoriteListener
 import com.lanh.uefachampions.utils.OnGetSeasonListener
 import com.lanh.uefachampions.utils.*
-import kotlinx.android.synthetic.main.fragment_home_page.*
 
-class HomePageFragment : Fragment(), OnGetSeasonListener, OnFavoriteListener {
+class HomePageFragment : BaseFragment<FragmentHomePageBinding, EmptyPresenter>(),
+    OnGetSeasonListener,
+    OnFavoriteListener {
+    override val layoutId: Int
+        get() = R.layout.fragment_home_page
 
+    override val presenter: EmptyPresenter by lazy { EmptyPresenter() }
     private val fragments = mutableListOf<Fragment>()
     private val newsFragment = NewsFragment.newInstance()
     private val fixturesFragment = FixturesFragment.newInstance()
     private val standingFragment = StandingFragment.newInstance()
     private val topScorersFragment = TopScorersFragment.newInstance()
     private val favoriteFragment = FavoriteFragment.newInstance()
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_home_page, container, false)
-    }
 
     override fun onClickFavoriteListener() {
         favoriteFragment.onUpdateFavorite()
@@ -45,19 +40,30 @@ class HomePageFragment : Fragment(), OnGetSeasonListener, OnFavoriteListener {
         favoriteFragment.updateSeason(season)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun initView() {
+        super.initView()
+        registerListener()
+        initFragment()
+        initViewPager()
+        initBottomItem()
+    }
+
+    private fun registerListener() {
         fixturesFragment.apply {
             registerGetSeasonListener(this@HomePageFragment)
             registerFavoriteListener(this@HomePageFragment)
         }
         standingFragment.registerFavoriteListener(this)
         favoriteFragment.registerFavoriteListener(this)
-        initFragment()
-        fragmentManager?.let {
-            viewPagerContainer.adapter = ViewPagerContainerAdapter(it, fragments)
-            viewPagerContainer.offscreenPageLimit = Constant.LIMIT_OFFSET
-            initBottomItem()
+    }
+
+
+    @SuppressLint("WrongConstant")
+    private fun initViewPager() {
+        with(binding.viewPagerContainer) {
+            adapter =
+                ViewPagerContainerAdapter(parentFragmentManager, lifecycle, fragments)
+            offscreenPageLimit = Constant.LIMIT_OFFSET
         }
     }
 
@@ -72,47 +78,40 @@ class HomePageFragment : Fragment(), OnGetSeasonListener, OnFavoriteListener {
     }
 
     private fun initBottomItem() {
-        bottomNavigation.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.homeItem -> {
-                    viewPagerContainer.currentItem = MenuItem.FIXTURES.ordinal
-                    true
+        with(binding) {
+            bottomNavigation.setOnItemSelectedListener {
+                when (it.itemId) {
+                    R.id.homeItem -> {
+                        viewPagerContainer.currentItem = MenuItem.FIXTURES.ordinal
+                        true
+                    }
+                    R.id.newsItem -> {
+                        viewPagerContainer.currentItem = MenuItem.NEWS.ordinal
+                        true
+                    }
+                    R.id.standingItem -> {
+                        viewPagerContainer.currentItem = MenuItem.STANDING.ordinal
+                        true
+                    }
+                    R.id.topScorersItem -> {
+                        viewPagerContainer.currentItem = MenuItem.SCORERS.ordinal
+                        true
+                    }
+                    R.id.favoriteItem -> {
+                        viewPagerContainer.currentItem = MenuItem.FAVORITE.ordinal
+                        true
+                    }
+                    else -> false
                 }
-                R.id.newsItem -> {
-                    viewPagerContainer.currentItem = MenuItem.NEWS.ordinal
-                    true
-                }
-                R.id.standingItem -> {
-                    viewPagerContainer.currentItem = MenuItem.STANDING.ordinal
-                    true
-                }
-                R.id.topScorersItem -> {
-                    viewPagerContainer.currentItem = MenuItem.SCORERS.ordinal
-                    true
-                }
-                R.id.favoriteItem -> {
-                    viewPagerContainer.currentItem = MenuItem.FAVORITE.ordinal
-                    true
-                }
-                else -> false
             }
+            viewPagerContainer.registerOnPageChangeCallback(object :
+                ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    hideKeyboard()
+                    bottomNavigation.menu.getItem(position).isChecked = true
+                }
+            })
         }
-        viewPagerContainer.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
-            }
-
-            override fun onPageSelected(position: Int) {
-                hideKeyboard()
-                bottomNavigation.menu.getItem(position).isChecked = true
-            }
-
-            override fun onPageScrollStateChanged(state: Int) {
-            }
-        })
     }
 
     companion object {

@@ -3,6 +3,7 @@ package com.lanh.uefachampions.utils
 import android.app.Activity
 import android.content.Context
 import android.os.AsyncTask
+import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,4 +44,13 @@ inline fun <reified B : ViewDataBinding> inflateView(
     return DataBindingUtil.inflate(
         LayoutInflater.from(parent.context), layoutRes, parent, false
     )
+}
+
+fun View.safeClick(blockInMillis: Long = 1000, onClick: (View) -> Unit) {
+    var lastClickTime: Long = 0
+    this.setOnClickListener {
+        if (SystemClock.elapsedRealtime() - lastClickTime < blockInMillis) return@setOnClickListener
+        lastClickTime = SystemClock.elapsedRealtime()
+        onClick(this)
+    }
 }

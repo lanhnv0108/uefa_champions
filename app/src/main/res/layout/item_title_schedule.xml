@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.lanh.uefachampions.screen.item.ItemTextTitleSchedule" />
+    </data>
+
+    <androidx.appcompat.widget.AppCompatTextView xmlns:android="http://schemas.android.com/apk/res/android"
+        style="@style/SFCompactTextView.Bold.24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_24"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:text="@{String.format(@string/schedule,item.getTimeString())}"
+        tools:text="Lịch hôm nay" />
+</layout>
