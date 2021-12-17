@@ -41,4 +41,6 @@
     <string name="news">Tin tức</string>
     <string name="live_en">Live</string>
     <string name="schedule">Lịch %s</string>
+    <string name="info_match_detail">Chi tiết trận đấu</string>
+    <string name="content_update_later">Nội dung sẽ được cập nhật sau</string>
 </resources>

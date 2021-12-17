@@ -1,7 +1,6 @@
 package com.lanh.uefachampions.screen.fixtures
 
 import android.util.Log
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ConcatAdapter
 import com.lanh.uefachampions.R
@@ -9,6 +8,7 @@ import com.lanh.uefachampions.data.model.Fixture
 import com.lanh.uefachampions.data.source.repository.FixtureRepository
 import com.lanh.uefachampions.databinding.FragmentFixturesBinding
 import com.lanh.uefachampions.screen.base.BaseFragment
+import com.lanh.uefachampions.screen.fixturedetail.FixtureDetailFragment
 import com.lanh.uefachampions.screen.fixtures.adapter.DateSeasonAdapter
 import com.lanh.uefachampions.screen.fixtures.adapter.ScheduleAdapter
 import com.lanh.uefachampions.screen.item.ItemDate
@@ -110,8 +110,7 @@ class FixturesFragment : BaseFragment<FragmentFixturesBinding, ContractFixture.P
     }
 
     private fun goToFixtureDetail(id: Int) {
-        // TODO Navigation SEASON MATCH DETAIL
-        Toast.makeText(requireContext(), "Item $id", Toast.LENGTH_SHORT).show()
+        addFragment(FixtureDetailFragment.newInstance(id), R.id.containerLayout)
     }
 
     companion object {

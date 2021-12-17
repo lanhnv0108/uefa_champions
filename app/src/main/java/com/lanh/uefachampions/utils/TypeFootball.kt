@@ -1,7 +1,9 @@
 package com.lanh.uefachampions.utils
 
 enum class TypeFootball(val path: String) {
-    FIXTURE("fixtures"),
+    FIXTURES("fixtures"),
+    FIXTURE("fixture"),
     LEAGUE("leagues"),
-    SEASON("/seasons")
+    SEASON("/seasons"),
+    STATISTICS("/statistics"),
 }

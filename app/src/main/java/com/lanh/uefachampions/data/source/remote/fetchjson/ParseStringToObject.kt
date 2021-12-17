@@ -34,6 +34,10 @@ class ParseStringToObject {
                     result,
                     object : TypeToken<BaseDataApiNews<NewsDetail>>() {}.type
                 )?.data
+                TypeModel.FIXTURE_DETAIL -> convertJsonToObject<BaseDataApiFootBall<List<FixtureDetailData>>>(
+                    result,
+                    object : TypeToken<BaseDataApiFootBall<List<FixtureDetailData>>>() {}.type
+                )?.response
                 else -> null
             }
         } catch (e: Throwable) {
