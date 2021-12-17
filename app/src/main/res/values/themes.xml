@@ -113,8 +113,16 @@
         <item name="android:textSize">@dimen/sp_24</item>
     </style>
 
+    <style name="GilroyTextView.Bold.20" parent="GilroyTextView.Bold">
+        <item name="android:textSize">@dimen/sp_24</item>
+    </style>
+
     <style name="GilroyTextView.Bold.24" parent="GilroyTextView.Bold">
         <item name="android:textSize">@dimen/sp_24</item>
+    </style>
+
+    <style name="GilroyTextView.Bold.36" parent="GilroyTextView.Bold">
+        <item name="android:textSize">@dimen/sp_36</item>
     </style>
 
     <style name="SFCompactTextView.Regular.10" parent="SFCompactTextView.Regular">
@@ -216,5 +224,6 @@
         <item name="android:clipToPadding">false</item>
         <item name="layoutManager">androidx.recyclerview.widget.LinearLayoutManager</item>
         <item name="android:descendantFocusability">blocksDescendants</item>
+        <item name="android:orientation">vertical</item>
     </style>
 </resources>

@@ -1,13 +1,13 @@
 package com.lanh.uefachampions.screen.fixtures
 
-import com.lanh.uefachampions.data.model.Fixture
+import com.lanh.uefachampions.data.model.FixtureSeason
 import com.lanh.uefachampions.utils.BasePresenter
 
 interface ContractFixture {
 
     interface View {
-        fun onGetFixtureSuccess(fixtures: MutableList<Fixture>)
-        fun onGetAllFixtureSuccess(fixtures: MutableList<Fixture>)
+        fun onGetFixtureSuccess(fixtures: MutableList<FixtureSeason>)
+        fun onGetAllFixtureSuccess(fixtures: MutableList<FixtureSeason>)
         fun getSeasonSuccess(season: MutableList<String>)
         fun onError(exception: Exception?)
     }

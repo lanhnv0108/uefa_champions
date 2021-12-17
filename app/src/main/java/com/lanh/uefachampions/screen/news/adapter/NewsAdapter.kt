@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.lanh.uefachampions.R
-import com.lanh.uefachampions.data.model.Fixture
 import com.lanh.uefachampions.data.model.News
 import com.lanh.uefachampions.utils.Constant
 

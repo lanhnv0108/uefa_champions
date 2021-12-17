@@ -1,11 +1,8 @@
 package com.lanh.uefachampions.screen.detialnews
 
-import com.lanh.uefachampions.data.model.Fixture
 import com.lanh.uefachampions.data.model.NewsDetail
 import com.lanh.uefachampions.data.source.remote.OnFetchDataJsonListener
 import com.lanh.uefachampions.data.source.repository.NewsDetailRepository
-import com.lanh.uefachampions.data.source.repository.NewsRepository
-import com.lanh.uefachampions.screen.news.ContractNews
 
 class NewsDetailPresenter internal constructor(private val repository: NewsDetailRepository?) :
     ContractNewsDetail.Presenter {

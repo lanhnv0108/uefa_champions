@@ -12,7 +12,7 @@ import com.lanh.uefachampions.screen.item.ItemTextTitleSchedule
 import com.lanh.uefachampions.utils.inflateView
 import com.lanh.uefachampions.utils.safeClick
 
-class ScheduleAdapter(private val onItemClick: (Int) -> Unit) :
+class ScheduleAdapter(private val onItemClick: (ItemTeamMatchSchedule) -> Unit) :
     BaseListAdapter<ItemSchedule, ItemTeamMatchScheduleBinding>() {
     override fun createCustomViewHolder(parent: ViewGroup, viewType: Int): Any {
         return when (viewType) {
@@ -34,13 +34,13 @@ class ScheduleAdapter(private val onItemClick: (Int) -> Unit) :
     }
 }
 
-class ScheduleViewHolder(parent: ViewGroup, private val onItemClick: (Int) -> Unit) :
+class ScheduleViewHolder(parent: ViewGroup, private val onItemClick: (ItemTeamMatchSchedule) -> Unit) :
     BaseViewHolder<ItemTeamMatchSchedule, ItemTeamMatchScheduleBinding>(
         inflateView(R.layout.item_team_match_schedule, parent)
     ) {
     init {
         binding.layoutItem.safeClick {
-            onItemClick.invoke(binding.item?.id ?: -1)
+            binding.item?.let(onItemClick)
         }
     }
 }

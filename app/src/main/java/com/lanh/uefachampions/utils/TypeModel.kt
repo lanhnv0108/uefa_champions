@@ -13,5 +13,6 @@ enum class TypeModel {
     TEAM_SEARCH,
     NEWS,
     DETAIL_NEWS,
-    ARTICLE
+    ARTICLE,
+    FIXTURE_DETAIL
 }
