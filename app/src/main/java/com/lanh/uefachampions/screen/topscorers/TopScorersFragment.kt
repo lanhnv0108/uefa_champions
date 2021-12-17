@@ -24,7 +24,7 @@ class TopScorersFragment : BaseFragment<FragmentTopScorersBinding, TopScorersCon
     private val adapter: TopScorersAdapter by lazy {
         TopScorersAdapter(::onItemPlayClick)
     }
-    private var season: String? = null
+    private var season: String? = "2021"
 
     fun updateSeason(season: String) {
         this.season = season

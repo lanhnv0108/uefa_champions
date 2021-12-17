@@ -115,6 +115,11 @@ class TeamDetailFragment : Fragment(), TeamDetailContract.View,
         this.onFavoriteListener = onFavoriteListener
     }
 
+    override fun onDestroy() {
+        onFavoriteListener = null
+        super.onDestroy()
+    }
+
     private fun initView() {
         recyclerViewPlayers.adapter = adapter
         adapter.registerItemRecyclerViewClickListener(this)

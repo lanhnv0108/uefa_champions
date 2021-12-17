@@ -16,9 +16,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 
 fun ImageView.loadImageUrl(url: String) {
-    LoadImageUrl {
-        this.setImageBitmap(it)
-    }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, url)
+    loadUrl(url)
 }
 
 fun ImageView.loadUrl(url: String) {

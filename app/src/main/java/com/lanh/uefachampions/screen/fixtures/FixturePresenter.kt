@@ -29,7 +29,7 @@ class FixturePresenter internal constructor(private val repository: FixtureRepos
             season,
             object : OnFetchDataJsonListener<MutableList<FixtureSeason>> {
                 override fun onSuccess(data: MutableList<FixtureSeason>) {
-                    view?.onGetAllFixtureSuccess(data)
+                    view?.onGetAllFixtureSuccess(data.apply { reverse() })
                 }
 
                 override fun onError(exception: Exception?) {

@@ -51,6 +51,11 @@ class FavoriteFragment : Fragment(), FavoriteContract.View,
         reloadData()
     }
 
+    override fun onDestroy() {
+        onFavoriteListener = null
+        super.onDestroy()
+    }
+
     override fun onDeleteTeamLocalSuccess() {
         presenter.onGetFavorites()
     }
@@ -70,7 +75,7 @@ class FavoriteFragment : Fragment(), FavoriteContract.View,
 
     override fun onClickItemListener(item: TeamDetail) {
         addFragment(
-            TeamDetailFragment.newInstance(item.id.toString(), season).apply {
+            TeamDetailFragment.newInstance(item.id.toString(), "2021").apply {
                 registerFavoriteListener(this@FavoriteFragment)
             },
             R.id.containerLayout
@@ -85,11 +90,7 @@ class FavoriteFragment : Fragment(), FavoriteContract.View,
     }
 
     override fun onClickFavoriteListener() {
-        this.onFavoriteListener?.onClickFavoriteListener()
-    }
-
-    fun registerFavoriteListener(onFavoriteListener: OnFavoriteListener) {
-        this.onFavoriteListener = onFavoriteListener
+        presenter.onGetFavorites()
     }
 
     private fun initView() {
@@ -102,10 +103,6 @@ class FavoriteFragment : Fragment(), FavoriteContract.View,
             setView(this@FavoriteFragment)
             onGetFavorites()
         }
-    }
-
-    fun onUpdateFavorite() {
-        initData()
     }
 
     fun updateSeason(season: String) {

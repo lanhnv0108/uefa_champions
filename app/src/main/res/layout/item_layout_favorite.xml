@@ -1,57 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_110"
-    android:layout_marginTop="@dimen/dp_10"
-    android:foreground="?attr/selectableItemBackground"
-    app:cardCornerRadius="@dimen/dp_10"
-    app:cardUseCompatPadding="true">
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/dp_14">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardViewFixture"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:backgroundTint="@color/color_grey_light"
+        app:cardCornerRadius="@dimen/dp_10"
+        app:cardElevation="0dp"
+        app:layout_constraintDimensionRatio="351:125"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="1.0"
+        tools:targetApi="lollipop">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imageViewLogo"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="50:50"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.07"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.15" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textViewNameTeam"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textColor="@color/color_orange_white"
-            android:textSize="@dimen/sp_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="203:29"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.3"
-            app:layout_constraintStart_toEndOf="@+id/imageViewLogo"
-            app:layout_constraintTop_toTopOf="parent" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageViewLogo"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/dp_16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.2" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imageViewFavorite"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/ic_favorite_checked"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="32:32"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.958"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.112"
-            app:layout_constraintWidth_percent="0.07" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageViewFavorite"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/dp_16"
+                android:layout_marginEnd="@dimen/dp_60"
+                android:background="@drawable/ic_favorite_checked"
+                app:layout_constraintDimensionRatio="32:32"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.08" />
+
+            <TextView
+                android:id="@+id/textViewNameTeam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_16"
+                android:layout_marginEnd="@dimen/dp_24"
+                android:fontFamily="@font/sf_compact_bold"
+                android:text="hfjkahfjkahjkfafhjakf"
+                android:textAlignment="center"
+                android:textSize="@dimen/sp_18"
+                app:layout_constraintStart_toEndOf="@id/imageViewLogo"
+                app:layout_constraintTop_toTopOf="@id/imageViewLogo" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--    android:id="@+id/constraintLayout"-->
+    <!--    android:layout_width="180dp"-->
+    <!--    android:layout_height="150dp"-->
+    <!--    android:background="@drawable/bg_red_light_corner_5"-->
+    <!--    android:backgroundTint="@color/gallery"-->
+    <!--    app:layout_constraintWidth_percent="0.43"-->
+    <!--    app:layout_constraintDimensionRatio="178:120"-->
+    <!--    android:paddingBottom="@dimen/dp_4"-->
+    <!--    android:layout_marginBottom="@dimen/dp_8">-->
+
+    <!--    <androidx.appcompat.widget.AppCompatImageView-->
+    <!--        android:id="@+id/imageViewLogo"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        app:layout_constraintDimensionRatio="100:100"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        android:layout_marginStart="@dimen/dp_16"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        android:layout_marginTop="@dimen/dp_16"-->
+    <!--        app:layout_constraintWidth_percent="0.3" />-->
+
+    <!--    <androidx.appcompat.widget.AppCompatTextView-->
+    <!--        android:id="@+id/textViewNameTeam"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="@dimen/dp_16"-->
+    <!--        android:maxLines="1"-->
+    <!--        android:text="fjalfjalkfjalfjalffjalkjfkla"-->
+    <!--        android:textColor="@color/color_black_text"-->
+    <!--        android:textSize="@dimen/sp_20"-->
+    <!--        app:fontFamily="@font/gilroy_bold"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/imageViewLogo" />-->
+
+    <!--    <androidx.appcompat.widget.AppCompatImageView-->
+    <!--        android:id="@+id/imageViewFavorite"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        android:background="@drawable/ic_favorite_checked"-->
+    <!--        app:layout_constraintDimensionRatio="32:32"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        android:layout_marginTop="@dimen/dp_16"-->
+    <!--        android:layout_marginEnd="@dimen/dp_16"-->
+    <!--        app:layout_constraintWidth_percent="0.15" />-->
+
+    <!--</androidx.constraintlayout.widget.ConstraintLayout>-->

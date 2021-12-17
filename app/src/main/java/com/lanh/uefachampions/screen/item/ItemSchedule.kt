@@ -3,12 +3,11 @@ package com.lanh.uefachampions.screen.item
 import android.os.Parcelable
 import com.lanh.uefachampions.data.model.GoalsData
 import com.lanh.uefachampions.data.model.TeamDetailsData
+import com.lanh.uefachampions.screen.base.ItemRecyclerview
 import kotlinx.android.parcel.Parcelize
 import org.joda.time.DateTime
 
-sealed class ItemSchedule
-
-data class ItemTextTitleSchedule(val time: DateTime?) : ItemSchedule() {
+data class ItemTextTitleSchedule(val time: DateTime?) : ItemRecyclerview() {
     fun getTimeString(): String {
         return when {
             time == null -> "các ngày trước đó"
@@ -25,4 +24,4 @@ data class ItemTeamMatchSchedule(
     val away: TeamDetailsData?,
     val time: String?,
     val goal: GoalsData?,
-) : ItemSchedule(),Parcelable
+) : ItemRecyclerview(), Parcelable

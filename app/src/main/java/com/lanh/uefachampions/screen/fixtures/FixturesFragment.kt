@@ -8,18 +8,20 @@ import com.lanh.uefachampions.data.model.FixtureSeason
 import com.lanh.uefachampions.data.source.repository.FixtureRepository
 import com.lanh.uefachampions.databinding.FragmentFixturesBinding
 import com.lanh.uefachampions.screen.base.BaseFragment
+import com.lanh.uefachampions.screen.base.NoInputItem
 import com.lanh.uefachampions.screen.fixturedetail.FixtureDetailFragment
 import com.lanh.uefachampions.screen.fixtures.adapter.DateSeasonAdapter
 import com.lanh.uefachampions.screen.fixtures.adapter.ScheduleAdapter
 import com.lanh.uefachampions.screen.item.ItemDate
 import com.lanh.uefachampions.screen.item.ItemTeamMatchSchedule
 import com.lanh.uefachampions.screen.item.ItemTextTitleSchedule
+import com.lanh.uefachampions.screen.searchteam.SearchFragment
 import com.lanh.uefachampions.utils.*
 import org.joda.time.DateTime
 import java.util.*
 
 class FixturesFragment : BaseFragment<FragmentFixturesBinding, ContractFixture.Presenter>(),
-    ContractFixture.View, OnFavoriteListener {
+    ContractFixture.View {
     override val layoutId: Int
         get() = R.layout.fragment_fixtures
 
@@ -52,12 +54,17 @@ class FixturesFragment : BaseFragment<FragmentFixturesBinding, ContractFixture.P
         binding.rcvFixtures.itemAnimator = null
         dateSeasonAdapter.submitItem(ItemDate(dateCurrent, true))
         dateSelected(dateCurrent)
+        goToSearchTeam()
     }
 
     override fun onGetFixtureSuccess(fixtures: MutableList<FixtureSeason>) {
         scheduleAdapter.submitList(
             scheduleAdapter.currentList.toMutableList().apply {
-                addAll(fixtures.map { it.mapItemSchedule() })
+                if (fixtures.isEmpty()) {
+                    add(NoInputItem())
+                } else {
+                    addAll(fixtures.map { it.mapItemSchedule() })
+                }
             }
         )
     }
@@ -83,14 +90,6 @@ class FixturesFragment : BaseFragment<FragmentFixturesBinding, ContractFixture.P
         Log.e("aaa", "$exception")
     }
 
-    override fun onClickFavoriteListener() {
-        onFavoriteListener?.onClickFavoriteListener()
-    }
-
-    fun registerFavoriteListener(onFavoriteListener: OnFavoriteListener) {
-        this.onFavoriteListener = onFavoriteListener
-    }
-
     fun registerGetSeasonListener(onGetSeasonListener: OnGetSeasonListener) {
         this.onGetSeasonListener = onGetSeasonListener
     }
@@ -112,6 +111,12 @@ class FixturesFragment : BaseFragment<FragmentFixturesBinding, ContractFixture.P
 
     private fun goToFixtureDetail(itemTeamMatchSchedule: ItemTeamMatchSchedule) {
         addFragment(FixtureDetailFragment.newInstance(itemTeamMatchSchedule), R.id.containerLayout)
+    }
+
+    private fun goToSearchTeam() {
+        binding.iconSearch.setOnClickListener {
+            addFragment(SearchFragment.newInstance("", "2021"), R.id.containerLayout)
+        }
     }
 
     companion object {

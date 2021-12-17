@@ -1,13 +1,12 @@
 package com.lanh.uefachampions.screen.favorite.adapter
 
-import android.os.AsyncTask
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.lanh.uefachampions.R
 import com.lanh.uefachampions.data.model.TeamDetail
-import com.lanh.uefachampions.utils.LoadImageUrl
+import com.lanh.uefachampions.utils.loadUrl
 import kotlinx.android.synthetic.main.item_layout_favorite.view.*
 
 class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
@@ -71,9 +70,7 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
         }
 
         private fun getImageLogo(favorite: TeamDetail) {
-            LoadImageUrl {
-                itemView.imageViewLogo?.setImageBitmap(it)
-            }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, favorite.logo)
+            favorite.logo?.let { itemView.imageViewLogo.loadUrl(it) }
         }
     }
 }

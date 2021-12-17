@@ -5,6 +5,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.lanh.uefachampions.data.model.TeamDetail
 import com.lanh.uefachampions.utils.LoadImageUrl
+import com.lanh.uefachampions.utils.loadUrl
 import kotlinx.android.synthetic.main.item_team_search.view.*
 
 @Suppress("NAME_SHADOWING")
@@ -22,9 +23,7 @@ class SearchTeamViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     private fun getImage(teamDetail: TeamDetail) {
         itemView.apply {
-            LoadImageUrl {
-                imageViewTeam.setImageBitmap(it)
-            }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, teamDetail.logo)
+            teamDetail.logo?.let { imageViewTeam.loadUrl(it) }
             setOnClickListener {
                 onItemClickTeam?.let { it -> it(teamDetail) }
             }

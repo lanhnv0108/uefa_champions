@@ -2,7 +2,7 @@ package com.lanh.uefachampions.data.source.remote
 
 import com.lanh.uefachampions.data.model.News
 import com.lanh.uefachampions.data.source.NewsDataSource
-import com.lanh.uefachampions.data.source.remote.fetchjson.GetJsonFromUrl
+import com.lanh.uefachampions.data.source.remote.fetchjson.GetJsonFromUrlWithGson
 import com.lanh.uefachampions.utils.TypeModel
 
 class NewsRemoteDataSource private constructor() :
@@ -10,7 +10,7 @@ class NewsRemoteDataSource private constructor() :
 
     override fun getNews(listener: OnFetchDataJsonListener<MutableList<News>>) {
         val baseUrl = "https://livescore-football.p.rapidapi.com/soccer/news-list?page=1"
-        GetJsonFromUrl(
+        GetJsonFromUrlWithGson(
             listener,
             TypeModel.NEWS
         ).execute(baseUrl)
