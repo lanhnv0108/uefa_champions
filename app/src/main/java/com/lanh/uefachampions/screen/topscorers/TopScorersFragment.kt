@@ -1,54 +1,39 @@
 package com.lanh.uefachampions.screen.topscorers
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import com.lanh.uefachampions.R
 import com.lanh.uefachampions.data.model.TopScorer
 import com.lanh.uefachampions.data.source.repository.TopScorerRepository
+import com.lanh.uefachampions.databinding.FragmentTopScorersBinding
+import com.lanh.uefachampions.screen.base.BaseFragment
 import com.lanh.uefachampions.screen.playerdetail.PlayerDetailFragment
 import com.lanh.uefachampions.screen.topscorers.adapter.TopScorersAdapter
-import com.lanh.uefachampions.utils.OnItemRecyclerViewClickListener
 import kotlinx.android.synthetic.main.fragment_favorite.*
 import kotlinx.android.synthetic.main.fragment_top_scorers.*
 import kotlinx.android.synthetic.main.fragment_top_scorers.swipeRefreshData
 import java.lang.Exception
 
-class TopScorersFragment : Fragment(), TopScorersContract.View,
-    OnItemRecyclerViewClickListener<TopScorer> {
-
-    private val presenter by lazy {
+class TopScorersFragment : BaseFragment<FragmentTopScorersBinding, TopScorersContract.Presenter>(),
+    TopScorersContract.View {
+    override val layoutId: Int
+        get() = R.layout.fragment_top_scorers
+    override val presenter by lazy {
         TopScorersPresenter(TopScorerRepository.instance)
     }
     private val adapter: TopScorersAdapter by lazy {
-        TopScorersAdapter()
+        TopScorersAdapter(::onItemPlayClick)
     }
     private var season: String? = null
 
     fun updateSeason(season: String) {
         this.season = season
-        initData()
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_top_scorers, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initView()
-        reloadData()
+        presenter.getTopScorer(season)
     }
 
     override fun onGetTopScorerSuccess(topScorers: MutableList<TopScorer>) {
-        adapter.updateData(topScorers)
+        Log.e("xxx" , topScorers.size.toString())
+        adapter.submitList(topScorers.mapIndexed { index, topScorer -> topScorer.copy(index = "${index + 1}") })
         swipeRefreshData.isRefreshing = false
     }
 
@@ -56,19 +41,19 @@ class TopScorersFragment : Fragment(), TopScorersContract.View,
         Toast.makeText(context, exception.message, Toast.LENGTH_SHORT).show()
     }
 
-    override fun onItemClickListener(item: TopScorer?) {
-        item?.player?.let {
+    private fun onItemPlayClick(item: TopScorer) {
+        item.player?.let {
             PlayerDetailFragment.newInstance(it)
                 .show(this@TopScorersFragment.childFragmentManager, null)
         }
     }
 
-    private fun initView() {
+    override fun initView() {
         recyclerViewTopScorers.adapter = adapter
-        adapter.registerItemRecyclerViewClickListener(this)
+        reloadData()
     }
 
-    private fun initData() {
+    override fun initPresenter() {
         presenter.run {
             setView(this@TopScorersFragment)
             season?.let { getTopScorer(it) }
@@ -77,7 +62,7 @@ class TopScorersFragment : Fragment(), TopScorersContract.View,
 
     private fun reloadData() {
         swipeRefreshData.setOnRefreshListener {
-            initData()
+            season?.let { presenter.getTopScorer(it) }
         }
     }
 

@@ -22,6 +22,169 @@
     </style>
 
     <!-- Customize TextView -->
+    <style name="GilroyTextView" parent="AppTheme">
+        <item name="fontFamily">@font/font_gilroy</item>
+        <item name="android:textColor">@color/mine_shaft</item>
+    </style>
+
+    <style name="SFCompactTextView" parent="AppTheme">
+        <item name="fontFamily">@font/font_sf_compact</item>
+        <item name="android:textColor">@color/mine_shaft</item>
+    </style>
+
+    <style name="GilroyTextView.Bold" parent="GilroyTextView">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="GilroyTextView.Medium" parent="GilroyTextView">
+        <item name="android:fontWeight">600</item>
+    </style>
+
+    <style name="GilroyTextView.Regular" parent="GilroyTextView">
+        <item name="android:fontWeight">400</item>
+    </style>
+
+    <style name="SFCompactTextView.Bold" parent="SFCompactTextView">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="SFCompactTextView.Medium" parent="SFCompactTextView">
+        <item name="android:fontWeight">600</item>
+    </style>
+
+    <style name="SFCompactTextView.Regular" parent="SFCompactTextView">
+        <item name="android:fontWeight">400</item>
+    </style>
+
+
+    <style name="GilroyTextView.Regular.10" parent="GilroyTextView.Regular">
+        <item name="android:textSize">@dimen/sp_10</item>
+    </style>
+
+    <style name="GilroyTextView.Medium.10" parent="GilroyTextView.Medium">
+        <item name="android:textSize">@dimen/sp_10</item>
+    </style>
+
+    <style name="GilroyTextView.Bold.10" parent="GilroyTextView.Bold">
+        <item name="android:textSize">@dimen/sp_10</item>
+    </style>
+
+    <style name="GilroyTextView.Regular.12" parent="GilroyTextView.Regular">
+        <item name="android:textSize">@dimen/sp_12</item>
+    </style>
+
+    <style name="GilroyTextView.Medium.12" parent="GilroyTextView.Medium">
+        <item name="android:textSize">@dimen/sp_12</item>
+    </style>
+
+    <style name="GilroyTextView.Bold.12" parent="GilroyTextView.Bold">
+        <item name="android:textSize">@dimen/sp_12</item>
+    </style>
+
+    <style name="GilroyTextView.Regular.14" parent="GilroyTextView.Regular">
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+
+    <style name="GilroyTextView.Medium.14" parent="GilroyTextView.Medium">
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+
+    <style name="GilroyTextView.Bold.14" parent="GilroyTextView.Bold">
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+
+    <style name="GilroyTextView.Regular.16" parent="GilroyTextView.Regular">
+        <item name="android:textSize">@dimen/sp_16</item>
+    </style>
+
+    <style name="GilroyTextView.Medium.16" parent="GilroyTextView.Medium">
+        <item name="android:textSize">@dimen/sp_16</item>
+    </style>
+
+    <style name="GilroyTextView.Bold.16" parent="GilroyTextView.Bold">
+        <item name="android:textSize">@dimen/sp_16</item>
+    </style>
+
+    <style name="GilroyTextView.Regular.24" parent="GilroyTextView.Regular">
+        <item name="android:textSize">@dimen/sp_24</item>
+    </style>
+
+    <style name="GilroyTextView.Medium.24" parent="GilroyTextView.Medium">
+        <item name="android:textSize">@dimen/sp_24</item>
+    </style>
+
+    <style name="GilroyTextView.Bold.20" parent="GilroyTextView.Bold">
+        <item name="android:textSize">@dimen/sp_24</item>
+    </style>
+
+    <style name="GilroyTextView.Bold.24" parent="GilroyTextView.Bold">
+        <item name="android:textSize">@dimen/sp_24</item>
+    </style>
+
+    <style name="GilroyTextView.Bold.36" parent="GilroyTextView.Bold">
+        <item name="android:textSize">@dimen/sp_36</item>
+    </style>
+
+    <style name="SFCompactTextView.Regular.10" parent="SFCompactTextView.Regular">
+        <item name="android:textSize">@dimen/sp_10</item>
+    </style>
+
+    <style name="SFCompactTextView.Medium.10" parent="SFCompactTextView.Medium">
+        <item name="android:textSize">@dimen/sp_10</item>
+    </style>
+
+    <style name="SFCompactTextView.Bold.10" parent="SFCompactTextView.Bold">
+        <item name="android:textSize">@dimen/sp_10</item>
+    </style>
+
+    <style name="SFCompactTextView.Regular.12" parent="SFCompactTextView.Regular">
+        <item name="android:textSize">@dimen/sp_12</item>
+    </style>
+
+    <style name="SFCompactTextView.Medium.12" parent="SFCompactTextView.Medium">
+        <item name="android:textSize">@dimen/sp_12</item>
+    </style>
+
+    <style name="SFCompactTextView.Bold.12" parent="SFCompactTextView.Bold">
+        <item name="android:textSize">@dimen/sp_12</item>
+    </style>
+
+    <style name="SFCompactTextView.Regular.14" parent="SFCompactTextView.Regular">
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+
+    <style name="SFCompactTextView.Medium.14" parent="SFCompactTextView.Medium">
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+
+    <style name="SFCompactTextView.Bold.14" parent="SFCompactTextView.Bold">
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+
+    <style name="SFCompactTextView.Regular.16" parent="SFCompactTextView.Regular">
+        <item name="android:textSize">@dimen/sp_16</item>
+    </style>
+
+    <style name="SFCompactTextView.Medium.16" parent="SFCompactTextView.Medium">
+        <item name="android:textSize">@dimen/sp_16</item>
+    </style>
+
+    <style name="SFCompactTextView.Bold.16" parent="SFCompactTextView.Bold">
+        <item name="android:textSize">@dimen/sp_16</item>
+    </style>
+
+    <style name="SFCompactTextView.Regular.24" parent="SFCompactTextView.Regular">
+        <item name="android:textSize">@dimen/sp_24</item>
+    </style>
+
+    <style name="SFCompactTextView.Medium.24" parent="SFCompactTextView.Medium">
+        <item name="android:textSize">@dimen/sp_24</item>
+    </style>
+
+    <style name="SFCompactTextView.Bold.24" parent="SFCompactTextView.Bold">
+        <item name="android:textSize">@dimen/sp_24</item>
+    </style>
+
     <style name="TextViewStyle" parent="android:Widget.TextView">
         <item name="android:textSize">@dimen/sp_12</item>
     </style>
@@ -55,5 +218,12 @@
     <style name="TextViewTitleStyle.White.Left" parent="TextViewTitleStyle">
         <item name="android:gravity">left</item>
         <item name="android:textColor">@color/color_white</item>
+    </style>
+
+    <style name="PrimaryRecyclerView">
+        <item name="android:clipToPadding">false</item>
+        <item name="layoutManager">androidx.recyclerview.widget.LinearLayoutManager</item>
+        <item name="android:descendantFocusability">blocksDescendants</item>
+        <item name="android:orientation">vertical</item>
     </style>
 </resources>

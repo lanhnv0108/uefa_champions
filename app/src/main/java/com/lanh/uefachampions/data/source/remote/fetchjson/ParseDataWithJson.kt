@@ -106,6 +106,18 @@ class ParseDataWithJson {
                         typeModel
                     )
                 }
+//                TypeModel.DETAIL_NEWS -> {
+//                    parseJsonToObject(
+//                        JSONObject(jsonString).getJSONObject(NewsDetailEntry.DATA),
+//                        typeModel
+//                    )
+//                }
+//                TypeModel.ARTICLE -> {
+//                    parseJsonToList(
+//                        JSONObject(jsonString).getJSONArray("article"),
+//                        typeModel
+//                    )
+//                }
                 else -> null
             }
         } catch (e: Exception) {
@@ -144,12 +156,18 @@ class ParseDataWithJson {
             TypeModel.NEWS -> {
                 parseJsonToModel.parseJsonToNews(json as JSONObject?)
             }
+//            TypeModel.DETAIL_NEWS -> {
+//                parseJsonToModel.parseJsonToNewsDetail(json as JSONObject?)
+//            }
+//            TypeModel.ARTICLE -> {
+//                parseJsonToModel.parseJsonToArticle(json as JSONObject?)
+//            }
             else -> null
         }
     }
 
     @Throws(Exception::class)
-    private fun parseJsonToList(jsonArray: JSONArray?, typeModel: TypeModel): Any {
+    fun parseJsonToList(jsonArray: JSONArray?, typeModel: TypeModel): Any {
         val data = mutableListOf<Any?>()
         for (i in 0 until (jsonArray?.length() ?: 0)) {
             val jsonObject = jsonArray?.getJSONObject(i)

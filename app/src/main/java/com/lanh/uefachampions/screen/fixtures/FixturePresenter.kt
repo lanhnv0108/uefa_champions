@@ -1,6 +1,6 @@
 package com.lanh.uefachampions.screen.fixtures
 
-import com.lanh.uefachampions.data.model.Fixture
+import com.lanh.uefachampions.data.model.FixtureSeason
 import com.lanh.uefachampions.data.source.remote.OnFetchDataJsonListener
 import com.lanh.uefachampions.data.source.repository.FixtureRepository
 
@@ -13,8 +13,8 @@ class FixturePresenter internal constructor(private val repository: FixtureRepos
         repository?.getFixture(
             date,
             season,
-            object : OnFetchDataJsonListener<MutableList<Fixture>> {
-                override fun onSuccess(data: MutableList<Fixture>) {
+            object : OnFetchDataJsonListener<MutableList<FixtureSeason>> {
+                override fun onSuccess(data: MutableList<FixtureSeason>) {
                     view?.onGetFixtureSuccess(data)
                 }
 
@@ -27,8 +27,8 @@ class FixturePresenter internal constructor(private val repository: FixtureRepos
     override fun getAllFixture(season: String) {
         repository?.getAllFixture(
             season,
-            object : OnFetchDataJsonListener<MutableList<Fixture>> {
-                override fun onSuccess(data: MutableList<Fixture>) {
+            object : OnFetchDataJsonListener<MutableList<FixtureSeason>> {
+                override fun onSuccess(data: MutableList<FixtureSeason>) {
                     view?.onGetAllFixtureSuccess(data)
                 }
 

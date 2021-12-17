@@ -2,17 +2,16 @@ package com.lanh.uefachampions.screen.base
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
+import androidx.lifecycle.Lifecycle
+import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class ViewPagerContainerAdapter(
     fragment: FragmentManager,
+    lifecycle: Lifecycle,
     private var fragments: MutableList<Fragment>
-) : FragmentPagerAdapter(
-    fragment,
-    BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
-) {
+) : FragmentStateAdapter(fragment, lifecycle) {
 
-    override fun getCount() = fragments.size
+    override fun getItemCount(): Int = fragments.size
 
-    override fun getItem(position: Int) = fragments[position]
+    override fun createFragment(position: Int) = fragments[position]
 }

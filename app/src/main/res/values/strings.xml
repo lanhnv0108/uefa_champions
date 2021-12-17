@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">UEFA Score</string>
     <string name="fixtures">Trận đấu</string>
-    <string name="standing">BXH</string>
+    <string name="standing">Bảng xếp hạng</string>
     <string name="top_scorers">BXH cầu thủ</string>
     <string name="favorites">Yêu thích</string>
     <string name="tittle_main">UEFA Champions league</string>
@@ -14,15 +14,15 @@
     <string name="passes">Passes</string>
     <string name="live_matches">Live Matches</string>
     <string name="view_all">View all</string>
-    <string name="live">LIVE</string>
+    <string name="live">Trực tiếp</string>
     <string name="history_matches">History Matches</string>
     <string name="title_rank">#</string>
-    <string name="title_team">Team</string>
+    <string name="title_team">Đội bóng</string>
     <string name="title_played">P</string>
     <string name="title_win">W</string>
     <string name="title_draw">D</string>
     <string name="title_lose">L</string>
-    <string name="title_goals">Goals</string>
+    <string name="title_goals">Go</string>
     <string name="title_points">PTS</string>
     <string name="title_player">Player</string>
     <string name="title_age">Age</string>
@@ -39,4 +39,8 @@
     <string name="back_again_to_exit">Back again to exit </string>
     <string name="upcoming">Upcoming</string>
     <string name="news">Tin tức</string>
+    <string name="live_en">Live</string>
+    <string name="schedule">Lịch %s</string>
+    <string name="info_match_detail">Chi tiết trận đấu</string>
+    <string name="content_update_later">Nội dung sẽ được cập nhật sau</string>
 </resources>

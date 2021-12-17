@@ -12,6 +12,7 @@ class ParseJsonToModel {
     fun parseJsonToFixture(jsonObject: JSONObject?): Fixture? =
         jsonObject?.run {
             Fixture(
+                id = getJSONObject(FixtureEntry.FIXTURE).getInt("id"),
                 date = getJSONObject(FixtureEntry.FIXTURE).getString(FixtureEntry.DATE),
                 home = parseJsonToTeam(getJSONObject(FixtureEntry.TEAMS).getJSONObject(FixtureEntry.HOME)),
                 away = parseJsonToTeam(getJSONObject(FixtureEntry.TEAMS).getJSONObject(FixtureEntry.AWAY)),
@@ -169,10 +170,33 @@ class ParseJsonToModel {
     fun parseJsonToNews(jsonObject: JSONObject?): News? =
         jsonObject?.run {
             News(
+                id = getString("id"),
                 title = getString(NewsEntry.TITLE),
                 image = getString(NewsEntry.IMAGE),
                 published = getString(NewsEntry.PUBLISHED),
                 slug = getString(NewsEntry.SLUG)
             )
         }
+
+//    fun parseJsonToNewsDetail(jsonObject: JSONObject?): NewsDetail? =
+//        jsonObject?.run {
+//            val parseDataWithJson = ParseDataWithJson()
+//            val article = parseDataWithJson.parseJsonToList(
+//                jsonObject.getJSONArray("article"),
+//                TypeModel.ARTICLE
+//            ) as MutableList<Article>
+//            NewsDetail(
+//                title = getString(NewsDetailEntry.TITLE),
+//                image = getJSONObject(NewsDetailEntry.IMAGE).getString(NewsDetailEntry.URL),
+//                published = getString(NewsDetailEntry.PUBLISHED),
+//                article = article
+//            )
+//        }
+//
+//    fun parseJsonToArticle(jsonObject: JSONObject?): Article? =
+//        jsonObject?.run {
+//            Article(
+//                p = getString(ArticleEntry.P)
+//            )
+//        }
 }

@@ -56,4 +56,10 @@
         <item name="android:gravity">left</item>
         <item name="android:textColor">@color/color_white</item>
     </style>
+
+    <style name="PrimaryRecyclerView">
+        <item name="android:clipToPadding">false</item>
+        <item name="layoutManager">androidx.recyclerview.widget.LinearLayoutManager</item>
+        <item name="android:descendantFocusability">blocksDescendants</item>
+    </style>
 </resources>

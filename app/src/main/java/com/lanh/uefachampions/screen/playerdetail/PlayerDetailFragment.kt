@@ -9,6 +9,7 @@ import androidx.fragment.app.DialogFragment
 import com.lanh.uefachampions.R
 import com.lanh.uefachampions.data.model.Player
 import com.lanh.uefachampions.utils.LoadImageUrl
+import com.lanh.uefachampions.utils.loadUrl
 import kotlinx.android.synthetic.main.fragment_player_detail.*
 
 class PlayerDetailFragment : DialogFragment() {
@@ -32,9 +33,7 @@ class PlayerDetailFragment : DialogFragment() {
             textViewNationality.text = it.nationality
             textViewWeight.text = it.weight
             textViewName.text = it.name
-            LoadImageUrl { bitmap ->
-                imageViewAvatar?.setImageBitmap(bitmap)
-            }.execute(it.photo)
+            imageViewAvatar.loadUrl(it.photo.toString())
         }
     }
 

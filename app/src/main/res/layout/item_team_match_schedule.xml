@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.lanh.uefachampions.screen.item.ItemTeamMatchSchedule" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/layoutItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_8"
+        android:background="@drawable/bg_red_light_corner_5"
+        android:backgroundTint="@color/gallery"
+        android:paddingStart="@dimen/dp_16"
+        android:paddingEnd="@dimen/dp_24">
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrierGoal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="start"
+            app:constraint_referenced_ids="tvTime,tvGoalTeamOne,tvGoalTeamTwo" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/logoTeamOne"
+            loadImageUrl="@{item.home.logo}"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24"
+            android:layout_marginTop="@dimen/dp_20"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvNameTeamOne"
+            style="@style/SFCompactTextView.Medium.16"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_8"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:maxLines="1"
+            android:text="@{item.home.name}"
+            app:layout_constraintBottom_toBottomOf="@id/logoTeamOne"
+            app:layout_constraintEnd_toStartOf="@id/barrierGoal"
+            app:layout_constraintStart_toEndOf="@id/logoTeamOne"
+            app:layout_constraintTop_toTopOf="@id/logoTeamOne"
+            tools:text="Benifica" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/logoTeamTwo"
+            loadImageUrl="@{item.away.logo}"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24"
+            android:layout_marginTop="@dimen/dp_12"
+            android:layout_marginBottom="@dimen/dp_20"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/logoTeamOne"
+            app:layout_constraintVertical_bias="0" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvNameTeamTwo"
+            style="@style/SFCompactTextView.Medium.16"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_8"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:maxLines="1"
+            android:text="@{item.away.name}"
+            app:layout_constraintBottom_toBottomOf="@id/logoTeamTwo"
+            app:layout_constraintEnd_toStartOf="@id/barrierGoal"
+            app:layout_constraintStart_toEndOf="@id/logoTeamTwo"
+            app:layout_constraintTop_toTopOf="@id/logoTeamTwo"
+            tools:text="Barcelona" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTime"
+            style="@style/SFCompactTextView.Medium.16"
+            isVisible="@{item.goal == null}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{item.time ?? ``}"
+            android:textColor="@color/outer_space"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="23:00AM" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvGoalTeamOne"
+            isVisible="@{item.goal != null}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_24"
+            android:text="@{String.valueOf(item.goal.home)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvNameTeamOne" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvGoalTeamTwo"
+            isVisible="@{item.goal != null}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_24"
+            android:text="@{String.valueOf(item.goal.away)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvNameTeamTwo" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,6 +1,6 @@
 package com.lanh.uefachampions
 
-import com.lanh.uefachampions.data.model.Fixture
+import com.lanh.uefachampions.data.model.FixtureData
 import com.lanh.uefachampions.data.model.Goals
 import com.lanh.uefachampions.data.model.Team
 import com.lanh.uefachampions.data.source.remote.OnFetchDataJsonListener

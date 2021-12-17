@@ -1,6 +1,7 @@
 package com.lanh.uefachampions.data.model
 
 data class Fixture(
+    val id: Int,
     val date: String?,
     val home: Team?,
     val away: Team?,
