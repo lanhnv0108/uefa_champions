@@ -1,6 +1,9 @@
 package com.lanh.uefachampions.screen.item
 
-import com.lanh.uefachampions.data.model.Team
+import android.os.Parcelable
+import com.lanh.uefachampions.data.model.GoalsData
+import com.lanh.uefachampions.data.model.TeamDetailsData
+import kotlinx.android.parcel.Parcelize
 import org.joda.time.DateTime
 
 sealed class ItemSchedule
@@ -15,11 +18,11 @@ data class ItemTextTitleSchedule(val time: DateTime?) : ItemSchedule() {
     }
 }
 
+@Parcelize
 data class ItemTeamMatchSchedule(
     val id: Int,
-    val teamOne: Team?,
-    val teamTwo: Team?,
+    val home: TeamDetailsData?,
+    val away: TeamDetailsData?,
     val time: String?,
-    val goalTeamOne: String?,
-    val goalTeamTwo: String?
-) : ItemSchedule()
+    val goal: GoalsData?,
+) : ItemSchedule(),Parcelable

@@ -1,8 +1,8 @@
 package com.lanh.uefachampions.data.source.remote
 
 import android.util.Log
-import com.lanh.uefachampions.data.model.Fixture
 import com.lanh.uefachampions.data.model.FixtureDetailData
+import com.lanh.uefachampions.data.model.FixtureSeason
 import com.lanh.uefachampions.data.source.FixtureDataSource
 import com.lanh.uefachampions.data.source.remote.fetchjson.GetJsonFromUrl
 import com.lanh.uefachampions.data.source.remote.fetchjson.GetJsonFromUrlWithGson
@@ -16,7 +16,7 @@ class FixtureRemoteDataSource private constructor() :
     override fun getFixture(
         date: String,
         season: String,
-        listener: OnFetchDataJsonListener<MutableList<Fixture>>
+        listener: OnFetchDataJsonListener<MutableList<FixtureSeason>>
     ) {
         val baseUrl = Constant.BASE_URL +
                 TypeFootball.FIXTURES.path +
@@ -24,7 +24,7 @@ class FixtureRemoteDataSource private constructor() :
                 Constant.BASE_LEAGUE +
                 Constant.BASE_SEASON +
                 season
-        GetJsonFromUrl(
+        GetJsonFromUrlWithGson(
             listener,
             TypeModel.FIXTURE
         ).execute(baseUrl)
@@ -33,14 +33,14 @@ class FixtureRemoteDataSource private constructor() :
 
     override fun getAllFixture(
         season: String,
-        listener: OnFetchDataJsonListener<MutableList<Fixture>>
+        listener: OnFetchDataJsonListener<MutableList<FixtureSeason>>
     ) {
         val baseUrl = Constant.BASE_URL +
                 TypeFootball.FIXTURES.path +
                 Constant.BASE_LEAGUE_ALL +
                 Constant.BASE_SEASON +
                 season
-        GetJsonFromUrl(
+        GetJsonFromUrlWithGson(
             listener,
             TypeModel.FIXTURE
         ).execute(baseUrl)

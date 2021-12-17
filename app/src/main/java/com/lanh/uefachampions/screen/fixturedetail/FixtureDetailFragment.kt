@@ -12,7 +12,7 @@ import com.lanh.uefachampions.databinding.FragmentFixtureDetailBinding
 import com.lanh.uefachampions.screen.base.BaseFragment
 import com.lanh.uefachampions.screen.fixturedetail.adapter.InfoFixtureDetailAdapter
 import com.lanh.uefachampions.screen.fixturedetail.adapter.TopFixtureDetailAdapter
-import com.lanh.uefachampions.utils.Constant.NOT_FOUND
+import com.lanh.uefachampions.screen.item.ItemTeamMatchSchedule
 
 class FixtureDetailFragment :
     BaseFragment<FragmentFixtureDetailBinding, FixtureDetailContact.Presenter>(),
@@ -23,7 +23,7 @@ class FixtureDetailFragment :
         FixtureDetailPresenter(FixtureRepository.instance)
     }
 
-    private var idFixture: Int? = NOT_FOUND
+    private var itemTeamMatchSchedule: ItemTeamMatchSchedule? = null
 
     private val topFixtureDetailAdapter by lazy {
         TopFixtureDetailAdapter()
@@ -38,14 +38,14 @@ class FixtureDetailFragment :
     }
 
     override fun initView() {
-        idFixture = arguments?.getInt(ARG_ID_FIXTURE) ?: NOT_FOUND
+        itemTeamMatchSchedule = arguments?.getParcelable(ARG_ID_FIXTURE)
         initSwipeRefreshLayout()
         binding.rcvFixtureDetail.adapter = adapter
     }
 
     override fun initPresenter() {
         presenter.setView(this)
-        idFixture?.let { presenter.getFixtureDetail(it) }
+        itemTeamMatchSchedule?.id?.let { presenter.getFixtureDetail(it) }
     }
 
     override fun handlerEvent() {
@@ -57,7 +57,7 @@ class FixtureDetailFragment :
     override fun onGetFixtureDetailSuccess(fixtureDetailData: List<FixtureDetailData>?) {
         binding.swipeRefreshData.isRefreshing = false
         binding.isEmptyContent = fixtureDetailData.isNullOrEmpty()
-        topFixtureDetailAdapter.submitItem(fixtureDetailData?.mapToTopFixtureDetailItem())
+        topFixtureDetailAdapter.submitItem(fixtureDetailData?.mapToTopFixtureDetailItem(itemTeamMatchSchedule?.goal))
         infoFixtureDetailAdapter.submitItem(fixtureDetailData?.mapToInfoFixtureDetailItem())
     }
 
@@ -72,16 +72,16 @@ class FixtureDetailFragment :
 
     private fun initSwipeRefreshLayout() {
         binding.swipeRefreshData.setOnRefreshListener {
-            idFixture?.let { presenter.getFixtureDetail(it, false) }
+            itemTeamMatchSchedule?.id?.let { presenter.getFixtureDetail(it, false) }
         }
     }
 
     companion object {
         private const val ARG_ID_FIXTURE = "ARG_ID_FIXTURE"
 
-        fun newInstance(idFixture: Int?) = FixtureDetailFragment().apply {
+        fun newInstance(itemTeamMatchSchedule: ItemTeamMatchSchedule) = FixtureDetailFragment().apply {
             arguments = bundleOf(
-                ARG_ID_FIXTURE to idFixture
+                ARG_ID_FIXTURE to itemTeamMatchSchedule
             )
         }
     }

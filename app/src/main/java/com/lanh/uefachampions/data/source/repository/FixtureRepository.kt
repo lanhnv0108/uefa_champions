@@ -1,7 +1,8 @@
 package com.lanh.uefachampions.data.source.repository
 
-import com.lanh.uefachampions.data.model.Fixture
+import com.lanh.uefachampions.data.model.FixtureData
 import com.lanh.uefachampions.data.model.FixtureDetailData
+import com.lanh.uefachampions.data.model.FixtureSeason
 import com.lanh.uefachampions.data.source.FixtureDataSource
 import com.lanh.uefachampions.data.source.remote.FixtureRemoteDataSource
 import com.lanh.uefachampions.data.source.remote.OnFetchDataJsonListener
@@ -13,14 +14,14 @@ class FixtureRepository private constructor(
     fun getFixture(
         date: String,
         season: String,
-        listener: OnFetchDataJsonListener<MutableList<Fixture>>
+        listener: OnFetchDataJsonListener<MutableList<FixtureSeason>>
     ) {
         remote.getFixture(date, season, listener)
     }
 
     fun getAllFixture(
         season: String,
-        listener: OnFetchDataJsonListener<MutableList<Fixture>>
+        listener: OnFetchDataJsonListener<MutableList<FixtureSeason>>
     ) {
         remote.getAllFixture(season, listener)
     }

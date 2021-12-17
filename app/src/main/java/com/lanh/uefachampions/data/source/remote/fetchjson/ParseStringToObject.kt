@@ -16,15 +16,11 @@ class ParseStringToObject {
     fun passGsonToObject(result: String, typeModel: TypeModel): Any? {
         return try {
             when (typeModel) {
-                TypeModel.FIXTURE -> {
-                    val data =
-                        convertJsonToObject<BaseDataApiFootBall<List<FixtureSeason>>>(
-                            result,
-                            object : TypeToken<BaseDataApiFootBall<List<FixtureSeason>>>() {}.type
-                        )?.response
-                    Log.e("data", "$data")
-                    null
-                }
+                TypeModel.FIXTURE ->
+                    convertJsonToObject<BaseDataApiFootBall<List<FixtureSeason>>>(
+                        result,
+                        object : TypeToken<BaseDataApiFootBall<List<FixtureSeason>>>() {}.type
+                    )?.response
                 TypeModel.NEWS ->
                     convertJsonToObject<BaseDataApiNews<List<News>>>(
                         result,

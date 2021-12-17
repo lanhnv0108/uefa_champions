@@ -20,23 +20,24 @@ data class FixtureDetailData(
     }
 
     fun getInfoMatch(statisticsOther: List<StatisticData>): List<InfoMatchItem>? {
-        return statistics?.zipWithNext { statisticHome, statisticAway ->
-            InfoMatchItem(
-                statisticHome.type,
-                (statisticHome.value ?: "0") to (statisticAway.value ?: "0")
-            )
+        return statistics?.map { statistic ->
+            val number: Pair<String, String> = (statistic.value ?: "0") to
+                    (statisticsOther.firstOrNull { it.type == statistic.type }?.value ?: "0")
+            InfoMatchItem(statistic.type, number = number)
         }
     }
 }
 
-fun List<FixtureDetailData>.mapToTopFixtureDetailItem(): TopFixtureDetailItem? {
+fun List<FixtureDetailData>.mapToTopFixtureDetailItem(
+    goal: GoalsData?,
+): TopFixtureDetailItem? {
     val teamHome = getOrNull(0)
     val teamAway = getOrNull(1)
     if (teamHome == null || teamAway == null) return null
     return TopFixtureDetailItem(
         teamHome = teamHome.team,
         teamAway = teamAway.team,
-        goal = teamHome.getInfo(SHOT_ON_GOAL) to (teamAway.getInfo(SHOT_ON_GOAL))
+        goal = goal?.let { it.home.toString() to it.away.toString() }
     )
 }
 
