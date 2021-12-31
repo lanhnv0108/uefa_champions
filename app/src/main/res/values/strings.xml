@@ -25,10 +25,10 @@
     <string name="title_goals">Go</string>
     <string name="title_points">PTS</string>
     <string name="title_player">Player</string>
-    <string name="title_age">Age</string>
-    <string name="title_nationality">Nationality</string>
-    <string name="title_height">Height</string>
-    <string name="title_weight">Weight</string>
+    <string name="title_age">Tuổi</string>
+    <string name="title_nationality">Quốc tịch</string>
+    <string name="title_height">Chiều cao</string>
+    <string name="title_weight">Cân nặng</string>
     <string name="title_city">City</string>
     <string name="title_country">Country</string>
     <string name="title_founded">Founded</string>

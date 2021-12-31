@@ -9,6 +9,7 @@ import com.lanh.uefachampions.R
 import com.lanh.uefachampions.data.model.PlayerDetail
 import com.lanh.uefachampions.utils.LoadImageUrl
 import com.lanh.uefachampions.utils.OnItemRecyclerViewClickListener
+import com.lanh.uefachampions.utils.loadUrl
 import kotlinx.android.synthetic.main.item_layout_player.view.*
 
 class PlayerAdapter : RecyclerView.Adapter<PlayerAdapter.ViewHolder?>() {
@@ -65,9 +66,7 @@ class PlayerAdapter : RecyclerView.Adapter<PlayerAdapter.ViewHolder?>() {
         }
 
         private fun getImageAvatar(playerDetail: PlayerDetail) {
-            LoadImageUrl {
-                itemView.imageViewAvatar?.setImageBitmap(it)
-            }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, playerDetail.player?.photo)
+            playerDetail.player?.photo?.let { itemView.imageViewAvatar.loadUrl(it) }
         }
 
         private fun getRank() {

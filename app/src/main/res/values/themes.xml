@@ -16,7 +16,7 @@
 
     <style name="ThemeOverlay.search" parent="AppTheme">
         <!-- Text color -->
-        <item name="android:editTextColor">@color/color_orange_white</item>
+        <item name="android:editTextColor">@color/green_haze</item>
         <!-- Hint text color -->
         <item name="android:textColorHint">@color/color_gray_light</item>
     </style>

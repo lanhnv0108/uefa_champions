@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_standing.*
 import kotlin.Exception
 
 class StandingFragment : BaseFragment<FragmentStandingBinding, StandingContract.Presenter>(),
-    StandingContract.View, OnFavoriteListener {
+    StandingContract.View{
     override val layoutId: Int
         get() = R.layout.fragment_standing
     override val presenter by lazy {
@@ -26,7 +26,7 @@ class StandingFragment : BaseFragment<FragmentStandingBinding, StandingContract.
     }
     private var onFavoriteListener: OnFavoriteListener? = null
 
-    private var season = ""
+    private var season = "2021"
 
     override fun onGetStandingLeagueSuccess(standingLeague: StandingLeague) {
         adapter.submitList(standingLeague.standingGroups)
@@ -42,19 +42,14 @@ class StandingFragment : BaseFragment<FragmentStandingBinding, StandingContract.
             TeamDetailFragment.newInstance(
                 item.id.toString(),
                 season
-            ).apply {
-                registerFavoriteListener(this@StandingFragment)
-            },
+            ),
             R.id.containerLayout
         )
     }
 
-    override fun onClickFavoriteListener() {
-        onFavoriteListener?.onClickFavoriteListener()
-    }
-
-    fun registerFavoriteListener(onFavoriteListener: OnFavoriteListener) {
-        this.onFavoriteListener = onFavoriteListener
+    override fun onDestroy() {
+        onFavoriteListener = null
+        super.onDestroy()
     }
 
     override fun initView() {

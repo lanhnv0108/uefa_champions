@@ -30,8 +30,9 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/sf_compact_bold"
         android:layout_marginTop="@dimen/dp_10"
-        android:text="@string/search_team"
-        android:textColor="@color/color_orange_white"
+        app:fontFamily="@font/gilroy_bold"
+        android:text="Tìm kiếm đội bóng"
+        android:textColor="@color/green_haze"
         android:textSize="@dimen/sp_24"
         app:layout_constraintStart_toStartOf="@id/guidelineLeft"
         app:layout_constraintTop_toBottomOf="@+id/imageViewBack" />
@@ -40,7 +41,7 @@
         android:id="@+id/searchViewTeamName"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/dp_28"
+        android:layout_marginTop="@dimen/dp_16"
         android:background="@drawable/background_search"
         android:closeIcon="@android:color/transparent"
         android:iconifiedByDefault="false"
@@ -48,7 +49,7 @@
         android:queryHint="@string/search_team"
         android:searchIcon="@drawable/ic_search"
         android:theme="@style/ThemeOverlay.search"
-        app:layout_constraintDimensionRatio="351:49"
+        app:layout_constraintDimensionRatio="360:59"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewFixture"
@@ -58,7 +59,7 @@
         android:id="@+id/swipeRefreshDataSearch"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/dp_23"
+        android:layout_marginTop="@dimen/dp_16"
         app:layout_constraintDimensionRatio="411:600"
         app:layout_constraintTop_toBottomOf="@id/searchViewTeamName">
 

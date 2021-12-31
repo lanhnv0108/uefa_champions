@@ -30,9 +30,9 @@ const val PASSES_ACCURATE = "Passes accurate"
 const val PASS_PERCENT = "Passes %"
 
 val translateStaticsVN = mapOf(
-    SHOT_ON_GOAL to "Shots on Goal",
-    SHOT_OFF_GOAL to "Shots off Goal",
-    TOTAL_SHOTS to "Total Shots",
+    SHOT_ON_GOAL to "Sút vào khung thành",
+    SHOT_OFF_GOAL to "Sút ra ngoài khung thành",
+    TOTAL_SHOTS to "Tổng cú sút",
     BLOCKED_SHOTS to "Blocked Shots",
     SHOTS_INSIDE_BOX to "Shots insidebox",
     SHOTS_OUTSIDE_BOX to "Shots outsidebox",
@@ -40,8 +40,8 @@ val translateStaticsVN = mapOf(
     CORNER_KICKS to "Corner Kicks",
     OFFSIDES to "Offsides",
     BALL_POSSESSION to "Ball Possession",
-    YELLOW_CARDS to "Yellow Cards",
-    RED_CARDS to "Red Cards",
+    YELLOW_CARDS to "Thẻ vàng",
+    RED_CARDS to "Thẻ đỏ",
     GOALKEEPER_SAVES to "Goalkeeper Saves",
     TOTAL_PASSES to "Total passes",
     PASSES_ACCURATE to "Passes accurate",
